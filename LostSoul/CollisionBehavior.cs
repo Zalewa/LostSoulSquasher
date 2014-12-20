@@ -34,7 +34,6 @@ namespace LostSoul
             {
                 if (ShouldCheckCollision(entity, other) && Collides(entity, other))
                 {
-                    Console.WriteLine("Collision detected");
                     other.CollisionBehavior.AddColliding(entity);
                     AddColliding(other);
                 }

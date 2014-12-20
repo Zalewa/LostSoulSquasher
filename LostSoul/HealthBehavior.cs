@@ -20,7 +20,6 @@ namespace LostSoul
 
         public void Damage()
         {
-            Console.WriteLine("Damage");
             if (!dead)
             {
                 dead = true;

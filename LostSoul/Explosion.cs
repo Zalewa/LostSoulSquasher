@@ -20,7 +20,6 @@ namespace LostSoul
 
         private void CollisionDetected(object sender, EventArgs e)
         {
-            Console.WriteLine("Colliding: " + CollisionBehavior.Colliding.Count);
             foreach (Entity colliding in CollisionBehavior.Colliding)
             {
                 if (colliding.HasHealthBehavior)
