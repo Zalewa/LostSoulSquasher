@@ -47,6 +47,7 @@
     <Compile Include="FloatingPoint.cs" />
     <Compile Include="LostSoul.cs" />
     <Compile Include="LostSoulAnimation.cs" />
+    <Compile Include="LostSoulPositionObserver.cs" />
     <Compile Include="LostSoulSpawner.cs" />
     <Compile Include="LostSoulSpawnerBehavior.cs" />
     <Compile Include="MovementBehavior.cs" />

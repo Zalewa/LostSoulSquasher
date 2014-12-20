@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -16,9 +17,37 @@ namespace LostSoul
         protected Behavior animationBehavior = new NullBehavior();
         protected Behavior movementBehavior = new NullBehavior();
 
-        public Vector2 Position { get; set; }
+        public event EventHandler PositionChanged;
+        public event EventHandler ExpiredChanged;
+
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+                OnPositionChanged();
+            }
+        }
         public bool Firing { get; set; }
-        public bool Expired { get; set; }
+
+        private bool expired;
+        public bool Expired
+        {
+            get
+            {
+                return expired;
+            }
+            set
+            {
+                expired = value;
+                OnExpiredChanged();
+            }
+        }
 
         public LostSoulGame Game
         {
@@ -60,6 +89,22 @@ namespace LostSoul
         public void Draw(GameTime gameTime)
         {
             renderBehavior.Run(gameTime, this);
+        }
+
+        private void OnPositionChanged()
+        {
+            if (PositionChanged != null)
+            {
+                PositionChanged(this, EventArgs.Empty);
+            }
+        }
+
+        private void OnExpiredChanged()
+        {
+            if (ExpiredChanged != null)
+            {
+                ExpiredChanged(this, EventArgs.Empty);
+            }
         }
     }
 }

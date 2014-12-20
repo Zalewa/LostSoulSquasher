@@ -8,6 +8,8 @@ namespace LostSoul
 {
     public class LostSoul : Entity
     {
+        private LostSoulPositionObserver positionObserver;
+
         public LostSoul(LostSoulGame game)
             : base(game)
         {
@@ -16,6 +18,8 @@ namespace LostSoul
 
             movementBehavior = new MovementBehavior();
             animationBehavior = new LostSoulAnimation(game);
+
+            positionObserver = new LostSoulPositionObserver(this);
         }
     }
 }
