@@ -81,10 +81,7 @@ namespace LostSoul
 
         private Matrix GetScaleMatrix()
         {
-            return Matrix.CreateScale(
-                GameScaleX(),
-                GameScaleY(),
-                1.0f);
+            return Matrix.CreateScale(GameScaleX(), GameScaleY(), 1.0f);
         }
 
         private float GameScaleY()
