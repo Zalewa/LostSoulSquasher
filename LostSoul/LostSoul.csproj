@@ -44,6 +44,10 @@
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Explosion.cs" />
+    <Compile Include="LostSoul.cs" />
+    <Compile Include="LostSoulSpawner.cs" />
+    <Compile Include="LostSoulSpawnerBehavior.cs" />
+    <Compile Include="MovementBehavior.cs" />
     <Compile Include="PlayerActionBehavior.cs" />
     <Compile Include="PlayerInputBehavior.cs" />
     <Compile Include="LostSoulGame.cs" />

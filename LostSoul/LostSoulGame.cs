@@ -13,7 +13,7 @@ namespace LostSoul
 {
     public class LostSoulGame : Game
     {
-        private readonly Rectangle PLAY_FIELD = new Rectangle(0, 0, 640, 480);
+        public readonly Rectangle PlayField = new Rectangle(0, 0, 640, 480);
 
         public GraphicsDeviceManager graphics;
         public SpriteBatch SpriteBatch;
@@ -21,6 +21,7 @@ namespace LostSoul
 
         private Background background;
         private Player player;
+        private LostSoulSpawner enemySpawner;
         private List<Entity> actors = new List<Entity>();
         private List<Entity> expiredActors = new List<Entity>();
 
@@ -50,7 +51,9 @@ namespace LostSoul
 
             background = new Background(this);
             player = new Player(this);
-            player.Position = new Vector2(PLAY_FIELD.Width / 2, PLAY_FIELD.Height / 2);
+            player.Position = new Vector2(PlayField.Width / 2, PlayField.Height / 2);
+
+            enemySpawner = new LostSoulSpawner(this);
 
             Vector2 mousePosition = ProjectGameCoordsToScreenCoords(player.Position);
             Mouse.SetPosition((int)mousePosition.X, (int)mousePosition.Y);
@@ -70,6 +73,7 @@ namespace LostSoul
 
             background.Update(gameTime);
             player.Update(gameTime);
+            enemySpawner.Update(gameTime);
             foreach (Entity actor in actors)
             {
                 actor.Update(gameTime);
@@ -99,11 +103,11 @@ namespace LostSoul
 
             SpriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scaleMatrix);
             background.Draw(gameTime);
-            player.Draw(gameTime);
             foreach (Entity actor in actors)
             {
                 actor.Draw(gameTime);
             }
+            player.Draw(gameTime);
             SpriteBatch.End();
             base.Draw(gameTime);
         }
@@ -115,12 +119,12 @@ namespace LostSoul
 
         private float GameScaleY()
         {
-            return graphics.PreferredBackBufferHeight / (float)PLAY_FIELD.Height;
+            return graphics.PreferredBackBufferHeight / (float)PlayField.Height;
         }
 
         private float GameScaleX()
         {
-            return graphics.PreferredBackBufferWidth / (float)PLAY_FIELD.Width;
+            return graphics.PreferredBackBufferWidth / (float)PlayField.Width;
         }
 
         internal Vector2 ProjectScreenCoordsToGameCoords(Vector2 point)
