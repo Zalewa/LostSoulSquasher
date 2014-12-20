@@ -13,9 +13,11 @@ namespace LostSoul
         protected Behavior inputBehavior = new NullBehavior();
         protected Behavior actionBehavior = new NullBehavior();
         protected Behavior renderBehavior = new NullBehavior();
+        protected Behavior animationBehavior = new NullBehavior();
 
         public Vector2 Position { get; set; }
         public bool Firing { get; set; }
+        public bool Expired { get; set; }
 
         public LostSoulGame Game
         {
@@ -42,6 +44,7 @@ namespace LostSoul
         {
             inputBehavior.Run(gameTime, this);
             actionBehavior.Run(gameTime, this);
+            animationBehavior.Run(gameTime, this);
         }
 
         public void Draw(GameTime gameTime)

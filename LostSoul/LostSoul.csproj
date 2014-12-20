@@ -38,10 +38,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimationBehavior.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Behavior.cs" />
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Explosion.cs" />
     <Compile Include="PlayerActionBehavior.cs" />
     <Compile Include="PlayerInputBehavior.cs" />
     <Compile Include="LostSoulGame.cs" />

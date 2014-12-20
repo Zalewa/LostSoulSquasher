@@ -21,6 +21,8 @@ namespace LostSoul
 
         private Background background;
         private Player player;
+        private List<Entity> actors = new List<Entity>();
+        private List<Entity> expiredActors = new List<Entity>();
 
         public LostSoulGame()
             : base()
@@ -29,6 +31,11 @@ namespace LostSoul
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             //IsFixedTimeStep = false;
+        }
+
+        public void AddActor(Entity entity)
+        {
+            actors.Add(entity);
         }
 
         protected override void Initialize()
@@ -63,8 +70,26 @@ namespace LostSoul
 
             background.Update(gameTime);
             player.Update(gameTime);
+            foreach (Entity actor in actors)
+            {
+                actor.Update(gameTime);
+                if (actor.Expired)
+                {
+                    expiredActors.Add(actor);
+                }
+            }
+            removeExpiredActors();
 
             base.Update(gameTime);
+        }
+
+        private void removeExpiredActors()
+        {
+            foreach (Entity actor in expiredActors)
+            {
+                actors.Remove(actor);
+            }
+            expiredActors.Clear();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -75,6 +100,10 @@ namespace LostSoul
             SpriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scaleMatrix);
             background.Draw(gameTime);
             player.Draw(gameTime);
+            foreach (Entity actor in actors)
+            {
+                actor.Draw(gameTime);
+            }
             SpriteBatch.End();
             base.Draw(gameTime);
         }
