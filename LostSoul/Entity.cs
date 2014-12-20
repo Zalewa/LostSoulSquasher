@@ -131,7 +131,7 @@ namespace LostSoul
             this.game = game;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             inputBehavior.Run(gameTime, this);
             actionBehavior.Run(gameTime, this);

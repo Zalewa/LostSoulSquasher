@@ -9,6 +9,8 @@ namespace LostSoul
     public class CollisionBehavior : Behavior
     {
         public event EventHandler CollisionDetected;
+        public bool Enabled { get; set; }
+
         private HashSet<Entity> colliding = new HashSet<Entity>();
         public HashSet<Entity> Colliding
         {
@@ -20,6 +22,7 @@ namespace LostSoul
 
         public CollisionBehavior(Entity entity)
         {
+            Enabled = true;
             entity.Game.RegisterCollision(this);
         }
 
@@ -42,7 +45,7 @@ namespace LostSoul
 
         public void FirePendingCollisionEvents()
         {
-            if (CollisionDetected != null)
+            if (CollisionDetected != null && Colliding.Count > 0)
             {
                 CollisionDetected(this, EventArgs.Empty);
             }
@@ -55,8 +58,11 @@ namespace LostSoul
 
         private bool ShouldCheckCollision(Entity us, Entity other)
         {
-            return us != other && !us.Expired && !other.Expired
-                && other.HasCollisionBehavior && !colliding.Contains(other);
+            return us != other && Enabled
+                && !us.Expired && !other.Expired
+                && other.HasCollisionBehavior
+                && other.CollisionBehavior.Enabled
+                && !colliding.Contains(other);
         }
 
         private void AddColliding(Entity entity)
