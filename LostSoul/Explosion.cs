@@ -14,6 +14,20 @@ namespace LostSoul
             var animationBehavior = new AnimationBehavior(AnimationFrame.mkCentered(game.ContentLoader.Explosion), 0.1f);
             animationBehavior.MarkEntityAsExpiredWhenDone = true;
             this.animationBehavior = animationBehavior;
+            collisionBehavior = new CollisionBehavior(this);
+            CollisionBehavior.CollisionDetected += CollisionDetected;
+        }
+
+        private void CollisionDetected(object sender, EventArgs e)
+        {
+            Console.WriteLine("Colliding: " + CollisionBehavior.Colliding.Count);
+            foreach (Entity colliding in CollisionBehavior.Colliding)
+            {
+                if (colliding.HasHealthBehavior)
+                {
+                    colliding.HealthBehavior.Damage();
+                }
+            }
         }
     }
 }

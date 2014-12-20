@@ -18,8 +18,17 @@ namespace LostSoul
 
             movementBehavior = new MovementBehavior();
             animationBehavior = new LostSoulAnimation(game);
+            collisionBehavior = new CollisionBehavior(this);
+            healthBehavior = new HealthBehavior(this);
+            HealthBehavior.DeathEvent += OnDeath;
 
             positionObserver = new LostSoulPositionObserver(this);
+        }
+
+        private void OnDeath(object sender, EventArgs e)
+        {
+            Game.Score += 100;
+            Expired = true;
         }
     }
 }

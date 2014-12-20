@@ -18,6 +18,7 @@ namespace LostSoul
         public GraphicsDeviceManager graphics;
         public SpriteBatch SpriteBatch;
         public ContentLoader ContentLoader = new ContentLoader();
+        public int Score;
 
         private Background background;
         private Player player;
@@ -25,6 +26,9 @@ namespace LostSoul
         private List<Entity> actors = new List<Entity>();
         private List<Entity> expiredActors = new List<Entity>();
         private int lostEnemies = 0;
+        private List<CollisionBehavior> collisions = new List<CollisionBehavior>();
+
+        public List<Entity> Actors { get { return actors; } }
 
         public LostSoulGame()
             : base()
@@ -88,6 +92,8 @@ namespace LostSoul
                     expiredActors.Add(actor);
                 }
             }
+            FirePendingCollisions();
+            ClearCollisions();
             removeExpiredActors();
 
             base.Update(gameTime);
@@ -98,8 +104,22 @@ namespace LostSoul
             foreach (Entity actor in expiredActors)
             {
                 actors.Remove(actor);
+                if (actor.HasCollisionBehavior)
+                {
+                    collisions.Remove(actor.CollisionBehavior);
+                }
             }
             expiredActors.Clear();
+        }
+
+        private void ClearCollisions()
+        {
+            collisions.ForEach(e => e.ClearCollisions());
+        }
+
+        private void FirePendingCollisions()
+        {
+            collisions.ForEach(e => e.FirePendingCollisionEvents());
         }
 
         protected override void Draw(GameTime gameTime)
@@ -115,7 +135,8 @@ namespace LostSoul
             }
             player.Draw(gameTime);
 
-            SpriteBatch.DrawString(ContentLoader.Font, "Lost souls: " + lostEnemies, Vector2.Zero, Color.White);
+            SpriteBatch.DrawString(ContentLoader.Font, "Score: " + Score, Vector2.Zero, Color.White);
+            SpriteBatch.DrawString(ContentLoader.Font, "Lost souls: " + lostEnemies, new Vector2(200.0f, 0.0f), Color.White);
             SpriteBatch.End();
             base.Draw(gameTime);
         }
@@ -143,6 +164,11 @@ namespace LostSoul
         internal Vector2 ProjectGameCoordsToScreenCoords(Vector2 point)
         {
             return new Vector2(point.X * GameScaleX(), point.Y * GameScaleY());
+        }
+
+        internal void RegisterCollision(CollisionBehavior collisionBehavior)
+        {
+            collisions.Add(collisionBehavior);
         }
     }
 }

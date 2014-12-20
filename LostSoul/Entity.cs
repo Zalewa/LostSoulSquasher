@@ -16,6 +16,8 @@ namespace LostSoul
         protected Behavior renderBehavior = new NullBehavior();
         protected Behavior animationBehavior = new NullBehavior();
         protected Behavior movementBehavior = new NullBehavior();
+        protected Behavior collisionBehavior = new NullBehavior();
+        protected Behavior healthBehavior = new NullBehavior();
 
         public event EventHandler PositionChanged;
         public event EventHandler ExpiredChanged;
@@ -33,6 +35,23 @@ namespace LostSoul
                 OnPositionChanged();
             }
         }
+
+        public Rectangle BoundingRectangle
+        {
+            get
+            {
+                if (HasRenderBehavior)
+                {
+                    var origin = RenderBehavior.Origin;
+                    var bounds = RenderBehavior.Texture.Bounds;
+                    bounds.Offset((int)-origin.X, (int)-origin.Y);
+                    bounds.Offset((int)Position.X, (int)Position.Y);
+                    return bounds;
+                }
+                return Rectangle.Empty;
+            }
+        }
+
         public bool Firing { get; set; }
 
         private bool expired;
@@ -65,6 +84,14 @@ namespace LostSoul
             }
         }
 
+        public bool HasRenderBehavior
+        {
+            get
+            {
+                return renderBehavior is RenderBehavior;
+            }
+        }
+
         public MovementBehavior MovementBehavior
         {
             get
@@ -72,6 +99,32 @@ namespace LostSoul
                 return (MovementBehavior)movementBehavior;
             }
         }
+
+        public CollisionBehavior CollisionBehavior
+        {
+            get
+            {
+                return (CollisionBehavior)collisionBehavior;
+            }
+        }
+
+        public bool HasCollisionBehavior
+        {
+            get
+            {
+                return collisionBehavior is CollisionBehavior;
+            }
+        }
+
+        public HealthBehavior HealthBehavior
+        {
+            get
+            {
+                return (HealthBehavior)healthBehavior;
+            }
+        }
+
+        public bool HasHealthBehavior { get { return healthBehavior is HealthBehavior; } }
 
         public Entity(LostSoulGame game)
         {
@@ -82,8 +135,10 @@ namespace LostSoul
         {
             inputBehavior.Run(gameTime, this);
             actionBehavior.Run(gameTime, this);
+            healthBehavior.Run(gameTime, this);
             movementBehavior.Run(gameTime, this);
             animationBehavior.Run(gameTime, this);
+            collisionBehavior.Run(gameTime, this);
         }
 
         public void Draw(GameTime gameTime)

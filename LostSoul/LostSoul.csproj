@@ -41,10 +41,12 @@
     <Compile Include="AnimationBehavior.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Behavior.cs" />
+    <Compile Include="CollisionBehavior.cs" />
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="FloatingPoint.cs" />
+    <Compile Include="HealthBehavior.cs" />
     <Compile Include="LostSoul.cs" />
     <Compile Include="LostSoulAnimation.cs" />
     <Compile Include="LostSoulPositionObserver.cs" />
