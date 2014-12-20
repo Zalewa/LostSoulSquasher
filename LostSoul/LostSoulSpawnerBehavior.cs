@@ -15,6 +15,8 @@ namespace LostSoul
 
         private Random random = new Random();
         private float countdownTillSpawn = 1.0f;
+        private int maxSouls = 1;
+        private List<Entity> souls = new List<Entity>();
 
         public override void Run(GameTime gameTime, Entity entity)
         {
@@ -32,7 +34,14 @@ namespace LostSoul
             var soul = new LostSoul(entity.Game);
             soul.Position = pickLocation(entity.Game, edge);
             soul.MovementBehavior.Velocity = pickVelocity(entity.Game, edge);
+            soul.ExpiredChanged += OnSoulExpired;
+            souls.Add(soul);
             entity.Game.AddActor(soul);
+        }
+
+        private void OnSoulExpired(object sender, EventArgs e)
+        {
+            souls.Remove((Entity)sender);
         }
 
         private Vector2 pickLocation(LostSoulGame game, Edge edge)
@@ -78,7 +87,7 @@ namespace LostSoul
 
         private bool shouldSpawn()
         {
-            return countdownTillSpawn <= 0.0f;
+            return countdownTillSpawn <= 0.0f && souls.Count < maxSouls;
         }
     }
 }
