@@ -16,6 +16,8 @@ namespace LostSoul
 
         public Texture2D[] Explosion;
 
+        public SpriteFont Font;
+
         public void LoadContent(ContentManager content)
         {
             Background = content.Load<Texture2D>("background");
@@ -28,6 +30,8 @@ namespace LostSoul
                 content.Load<Texture2D>("MISLC0"),
                 content.Load<Texture2D>("MISLD0")
             };
+
+            Font = content.Load<SpriteFont>("Miramonte");
         }
     }
 }

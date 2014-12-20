@@ -24,6 +24,7 @@ namespace LostSoul
         private LostSoulSpawner enemySpawner;
         private List<Entity> actors = new List<Entity>();
         private List<Entity> expiredActors = new List<Entity>();
+        private int lostEnemies = 0;
 
         public LostSoulGame()
             : base()
@@ -37,6 +38,11 @@ namespace LostSoul
         public void AddActor(Entity entity)
         {
             actors.Add(entity);
+        }
+
+        public void IncrementLostEnemy()
+        {
+            ++lostEnemies;
         }
 
         protected override void Initialize()
@@ -108,6 +114,8 @@ namespace LostSoul
                 actor.Draw(gameTime);
             }
             player.Draw(gameTime);
+
+            SpriteBatch.DrawString(ContentLoader.Font, "Lost souls: " + lostEnemies, Vector2.Zero, Color.White);
             SpriteBatch.End();
             base.Draw(gameTime);
         }
