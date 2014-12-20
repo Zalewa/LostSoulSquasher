@@ -13,6 +13,9 @@ namespace LostSoul
         {
             renderBehavior = new RenderBehavior(game, game.ContentLoader.SkullLeft);
             RenderBehavior.Origin = new Vector2(RenderBehavior.Texture.Width / 2, RenderBehavior.Texture.Height / 2);
+
+            movementBehavior = new MovementBehavior();
+            animationBehavior = new LostSoulAnimation(game);
         }
     }
 }

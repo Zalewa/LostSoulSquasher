@@ -28,15 +28,15 @@ namespace LostSoul
 
         private void spawn(Entity entity)
         {
-            Vector2 location = pickLocation(entity.Game);
+            Edge edge = pickEdge();
             var soul = new LostSoul(entity.Game);
-            soul.Position = location;
+            soul.Position = pickLocation(entity.Game, edge);
+            soul.MovementBehavior.Velocity = pickVelocity(entity.Game, edge);
             entity.Game.AddActor(soul);
         }
 
-        private Vector2 pickLocation(LostSoulGame game)
+        private Vector2 pickLocation(LostSoulGame game, Edge edge)
         {
-            Edge edge = pickEdge();
             switch (edge)
             {
                 case Edge.Left:
@@ -47,6 +47,24 @@ namespace LostSoul
                     return new Vector2(random.Next(game.PlayField.Left, game.PlayField.Right), game.PlayField.Top);
                 case Edge.Bottom:
                     return new Vector2(random.Next(game.PlayField.Left, game.PlayField.Right), game.PlayField.Bottom);
+                default:
+                    throw new NotImplementedException("unknown edge " + edge);
+            }
+        }
+
+        private Vector2 pickVelocity(LostSoulGame game, Edge edge)
+        {
+            float speed = 30.0f;
+            switch (edge)
+            {
+                case Edge.Left:
+                    return new Vector2(speed, 0.0f);
+                case Edge.Right:
+                    return new Vector2(-speed, 0.0f);
+                case Edge.Top:
+                    return new Vector2(0.0f, speed);
+                case Edge.Bottom:
+                    return new Vector2(0.0f, -speed);
                 default:
                     throw new NotImplementedException("unknown edge " + edge);
             }

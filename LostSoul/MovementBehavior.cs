@@ -8,9 +8,16 @@ namespace LostSoul
 {
     public class MovementBehavior : Behavior
     {
+        public Vector2 Velocity { get; set; }
+
+        public MovementBehavior()
+        {
+            Velocity = Vector2.Zero;
+        }
+
         public override void Run(GameTime gameTime, Entity entity)
         {
-            throw new NotImplementedException();
+            entity.Position += Vector2.Multiply(Velocity, (float)gameTime.ElapsedGameTime.TotalSeconds);
         }
     }
 }

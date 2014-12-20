@@ -36,6 +36,14 @@ namespace LostSoul
             }
         }
 
+        public MovementBehavior MovementBehavior
+        {
+            get
+            {
+                return (MovementBehavior)movementBehavior;
+            }
+        }
+
         public Entity(LostSoulGame game)
         {
             this.game = game;

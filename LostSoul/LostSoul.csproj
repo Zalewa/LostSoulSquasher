@@ -44,7 +44,9 @@
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Explosion.cs" />
+    <Compile Include="FloatingPoint.cs" />
     <Compile Include="LostSoul.cs" />
+    <Compile Include="LostSoulAnimation.cs" />
     <Compile Include="LostSoulSpawner.cs" />
     <Compile Include="LostSoulSpawnerBehavior.cs" />
     <Compile Include="MovementBehavior.cs" />
