@@ -151,7 +151,7 @@
     <Compile Include="Carefree.mp3">
       <Name>Carefree</Name>
       <Importer>Mp3Importer</Importer>
-      <Processor>MGSongProcessor</Processor>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
