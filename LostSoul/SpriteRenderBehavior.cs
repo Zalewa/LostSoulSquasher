@@ -11,17 +11,24 @@ namespace LostSoul
     {
         private LostSoulGame game;
         public Texture2D Texture { get; set; }
+        public Vector2 Scale { get; set; }
 
         public SpriteRenderBehavior(LostSoulGame game, Texture2D texture)
         {
             this.game = game;
             Texture = texture;
+            Scale = Vector2.One;
         }
 
         public override void Run(GameTime gameTime, Entity entity)
         {
-            game.SpriteBatch.Draw(Texture, entity.BodyBehavior.Position, null,
-                Color.White, 0.0f, Origin, 1.0f, SpriteEffects.None, 0.0f);
+            Rectangle destinationRectangle = new Rectangle(
+                (int)entity.BodyBehavior.Position.X,
+                (int)entity.BodyBehavior.Position.Y,
+                (int)(Texture.Width * Scale.X),
+                (int)(Texture.Height * Scale.Y));
+            game.SpriteBatch.Draw(Texture, destinationRectangle, null,
+                Color.White, 0.0f, Origin, SpriteEffects.None, 0.0f);
         }
 
         public override Vector2 Size

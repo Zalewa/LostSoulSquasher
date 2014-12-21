@@ -60,6 +60,10 @@
     <Compile Include="BackgroundAnimationBehavior.cs" />
     <Compile Include="Behavior.cs" />
     <Compile Include="BodyBehavior.cs" />
+    <Compile Include="Bonus.cs" />
+    <Compile Include="BonusClass.cs" />
+    <Compile Include="BonusSpawner.cs" />
+    <Compile Include="BonusSpawnerBehavior.cs" />
     <Compile Include="GameObjectBodyBehavior.cs" />
     <Compile Include="HudElement.cs" />
     <Compile Include="HudElementText.cs" />

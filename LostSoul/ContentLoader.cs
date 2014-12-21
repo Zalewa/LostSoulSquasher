@@ -25,6 +25,8 @@ namespace LostSoul
 
         public Song Ambient1;
 
+        public Texture2D BonusOneUp;
+
         public void LoadContent(ContentManager content)
         {
             Backgrounds = new Texture2D[] {
@@ -50,6 +52,8 @@ namespace LostSoul
 
             ExplosionSound = content.Load<SoundEffect>("DSBAREXP");
             Ambient1 = content.Load<Song>("Carefree");
+
+            BonusOneUp = content.Load<Texture2D>("bonus_1up");
         }
     }
 }
