@@ -13,6 +13,13 @@ namespace LostSoul
 {
     public class LostSoulGame : Game
     {
+        private struct VideoMode
+        {
+            public int Width;
+            public int Height;
+            public bool FullScreen;
+        };
+
         public readonly Rectangle PlayField = new Rectangle(0, 0, 640, 480);
 
         private GraphicsDeviceManager graphics;
@@ -26,6 +33,8 @@ namespace LostSoul
 
         private LostSoulWorld world;
         public LostSoulWorld World { get { return world; } }
+
+        private VideoMode windowedMode;
 
         public LostSoulGame()
             : base()
@@ -43,6 +52,43 @@ namespace LostSoul
         {
             world = new LostSoulWorld(this);
             world.LoadContent();
+        }
+
+        public void ToggleFullScreen()
+        {
+            if (!Graphics.IsFullScreen)
+            {
+                SwitchToFullScreen();
+            }
+            else
+            {
+                SwitchToWindowed();
+            }
+        }
+
+        private void SwitchToWindowed()
+        {
+            Graphics.PreferredBackBufferWidth = windowedMode.Width;
+            Graphics.PreferredBackBufferHeight = windowedMode.Height;
+            Graphics.IsFullScreen = false;
+            Graphics.ApplyChanges();
+        }
+
+        private void SwitchToFullScreen()
+        {
+            windowedMode = new VideoMode()
+            {
+                Width = Graphics.PreferredBackBufferWidth,
+                Height = Graphics.PreferredBackBufferHeight,
+                FullScreen = false
+            };
+            var modes = GraphicsDevice.Adapter.SupportedDisplayModes;
+            DisplayMode displayMode = GraphicsDevice.Adapter.CurrentDisplayMode;
+            Console.WriteLine(displayMode);
+            Graphics.PreferredBackBufferWidth = displayMode.Width;
+            Graphics.PreferredBackBufferHeight = displayMode.Height;
+            Graphics.IsFullScreen = true;
+            Graphics.ApplyChanges();
         }
 
         void OnActivatedHandler(object sender, EventArgs e)

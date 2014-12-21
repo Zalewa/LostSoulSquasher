@@ -36,6 +36,10 @@ namespace LostSoul
             {
                 world.Background.CycleBackground();
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.F) && oldKeyboardState.IsKeyUp(Keys.F))
+            {
+                world.Game.ToggleFullScreen();
+            }
             oldMouseState = Mouse.GetState();
             oldKeyboardState = Keyboard.GetState();
         }
