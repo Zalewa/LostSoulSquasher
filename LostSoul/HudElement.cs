@@ -15,7 +15,7 @@ namespace LostSoul
         public HudElement(LostSoulGame game)
             : base(game)
         {
-            bodyBehavior = new BodyBehavior(this);
+            bodyBehavior = new PlaneBodyBehavior(this);
             Visible = true;
         }
 

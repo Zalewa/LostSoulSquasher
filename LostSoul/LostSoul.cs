@@ -13,10 +13,12 @@ namespace LostSoul
         public LostSoul(LostSoulGame game)
             : base(game)
         {
-            bodyBehavior = new BodyBehavior(this);
+            bodyBehavior = new GameObjectBodyBehavior(this);
 
             renderBehavior = new SpriteRenderBehavior(game, game.ContentLoader.SkullLeft);
             RenderBehavior.CenterOrigin();
+
+            bodyBehavior.Size = renderBehavior.Size;
 
             movementBehavior = new MovementBehavior();
             animationBehavior = new LostSoulAnimation(game);

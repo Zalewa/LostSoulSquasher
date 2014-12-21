@@ -13,7 +13,7 @@ namespace LostSoul
             : base(game)
         {
             Texture2D texture = game.ContentLoader.Crosshair;
-            bodyBehavior = new BodyBehavior(this);
+            bodyBehavior = new GameObjectBodyBehavior(this);
             renderBehavior = new SpriteRenderBehavior(game, texture);
             RenderBehavior.CenterOrigin();
 

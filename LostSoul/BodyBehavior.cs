@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LostSoul
 {
-    public class BodyBehavior : Behavior
+    public abstract class BodyBehavior : Behavior
     {
         private Entity entity;
         private Vector2 position;
@@ -40,19 +40,8 @@ namespace LostSoul
             }
         }
 
-        public Rectangle BoundingRectangle
-        {
-            get
-            {
-                if (entity.RenderBehavior != null)
-                {
-                    var bounds = entity.RenderBehavior.BoundingRectangle;
-                    bounds.Offset((int)Position.X, (int)Position.Y);
-                    return bounds;
-                }
-                return Rectangle.Empty;
-            }
-        }
+        public Vector2 Size { get; set; }
+        public abstract Rectangle BoundingRectangle { get; }
 
         public Entity Entity
         {

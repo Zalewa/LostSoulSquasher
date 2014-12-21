@@ -45,6 +45,7 @@
     <Compile Include="BackgroundAnimationBehavior.cs" />
     <Compile Include="Behavior.cs" />
     <Compile Include="BodyBehavior.cs" />
+    <Compile Include="GameObjectBodyBehavior.cs" />
     <Compile Include="HudElement.cs" />
     <Compile Include="HudElementText.cs" />
     <Compile Include="LostSoulWorld.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="LostSoulWorldHud.cs" />
     <Compile Include="LostSoulWorldInputBehavior.cs" />
     <Compile Include="MovementBehavior.cs" />
+    <Compile Include="PlaneBodyBehavior.cs" />
     <Compile Include="PlayerActionBehavior.cs" />
     <Compile Include="PlayerInputBehavior.cs" />
     <Compile Include="LostSoulGame.cs" />
