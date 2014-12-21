@@ -91,27 +91,41 @@ namespace LostSoul
 
         private void DrawGameOverHud()
         {
+            DrawScore();
+            DrawGameOverText();
+            DrawGameOverInstructions();
+        }
+
+        private void DrawGameOverText()
+        {
             var center = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
-            Vector2 textPosition;
-            Vector2 measure;
 
             string msgGameOver = "Game Over";
-            measure = Font.MeasureString(msgGameOver);
-            textPosition = center - measure / 2.0f;
+            Vector2 measure = Font.MeasureString(msgGameOver);
+            Vector2 textPosition = center - measure / 2.0f;
             textPosition.Y -= measure.Y;
             SpriteBatch.DrawString(Font, msgGameOver, textPosition, Color.Red);
+        }
 
+        private void DrawGameOverInstructions()
+        {
+            var center = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
             string msgInstructions = "Press RMB to restart or Escape to exit.";
-            measure = Font.MeasureString(msgInstructions);
-            textPosition = center - measure / 2.0f;
+            Vector2 measure = Font.MeasureString(msgInstructions);
+            Vector2 textPosition = center - measure / 2.0f;
             textPosition.Y += measure.Y;
             SpriteBatch.DrawString(Font, msgInstructions, textPosition, Color.Red);
         }
 
         private void DrawGameHud()
         {
-            SpriteBatch.DrawString(Font, "Score: " + Score, Vector2.Zero, Color.Red);
+            DrawScore();
             SpriteBatch.DrawString(Font, "Lost souls: " + lostEnemies + " of " + MaxLostSouls, new Vector2(200.0f, 0.0f), Color.Red);
+        }
+
+        private void DrawScore()
+        {
+            SpriteBatch.DrawString(Font, "Score: " + Score, Vector2.Zero, Color.Red);
         }
 
         public void AddActor(Entity entity)
