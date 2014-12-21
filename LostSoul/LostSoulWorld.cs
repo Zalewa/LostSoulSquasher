@@ -45,6 +45,7 @@ namespace LostSoul
             player.BodyBehavior.Position = new Vector2(Game.PlayField.Center.X, Game.PlayField.Center.Y);
 
             enemySpawner = new LostSoulSpawner(Game);
+            Game.Audio.PlayMusic(Game.ContentLoader.Ambient1);
         }
 
         public override void Update(GameTime gameTime)
