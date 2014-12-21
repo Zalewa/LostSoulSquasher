@@ -36,13 +36,9 @@ namespace LostSoul
 
         private void SetTexture(Entity entity, Texture2D texture)
         {
-            entity.RenderBehavior.Texture = texture;
-            entity.RenderBehavior.Origin = GetTextureOrigin(texture);
-        }
-
-        private Vector2 GetTextureOrigin(Texture2D texture)
-        {
-            return new Vector2(texture.Width / 2, texture.Height / 2);
+            var render = (SpriteRenderBehavior)entity.RenderBehavior;
+            render.Texture = texture;
+            render.CenterOrigin();
         }
     }
 }

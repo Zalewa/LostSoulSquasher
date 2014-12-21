@@ -14,7 +14,7 @@ namespace LostSoul
             : base(game)
         {
             bodyBehavior = new BodyBehavior(this);
-            renderBehavior = new RenderBehavior(game, game.ContentLoader.Explosion[0]);
+            renderBehavior = new SpriteRenderBehavior(game, game.ContentLoader.Explosion[0]);
             var animationBehavior = new AnimationBehavior(AnimationFrame.MkCentered(game.ContentLoader.Explosion), 0.1f);
             animationBehavior.MarkEntityAsExpiredWhenDone = true;
             this.animationBehavior = animationBehavior;

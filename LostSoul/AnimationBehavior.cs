@@ -37,8 +37,9 @@ namespace LostSoul
             countdownToNextFrame -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             while (IsSkipTime())
             {
-                entity.RenderBehavior.Texture = frames[frameIndex].Texture;
-                entity.RenderBehavior.Origin = frames[frameIndex].Origin;
+                var render = (SpriteRenderBehavior)entity.RenderBehavior;
+                render.Texture = frames[frameIndex].Texture;
+                render.Origin = frames[frameIndex].Origin;
                 ++frameIndex;
                 countdownToNextFrame += Interval;
             }

@@ -7,23 +7,28 @@ using System.Text;
 
 namespace LostSoul
 {
-    public class RenderBehavior : Behavior
+    public abstract class RenderBehavior : Behavior
     {
-        LostSoulGame game;
-
         public Vector2 Origin { get; set; }
-        public Texture2D Texture { get; set; }
+        public abstract Vector2 Size { get; }
 
-        public RenderBehavior(LostSoulGame game, Texture2D texture)
+        public RenderBehavior()
         {
-            this.game = game;
-            this.Texture = texture;
             this.Origin = Vector2.Zero;
         }
 
-        public override void Run(GameTime gameTime, Entity entity)
+        public void CenterOrigin()
         {
-            game.SpriteBatch.Draw(Texture, entity.BodyBehavior.Position, null, Color.White, 0.0f, Origin, 1.0f, SpriteEffects.None, 0.0f);
+            Origin = Size / 2.0f;
+        }
+
+        public Rectangle BoundingRectangle
+        {
+            get
+            {
+                return new Rectangle((int)Origin.X, (int)Origin.Y,
+                    (int)(Size.X - Origin.X), (int)(Size.Y - Origin.Y));
+            }
         }
     }
 }

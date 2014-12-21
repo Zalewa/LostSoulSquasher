@@ -46,9 +46,7 @@ namespace LostSoul
             {
                 if (entity.RenderBehavior != null)
                 {
-                    var origin = entity.RenderBehavior.Origin;
-                    var bounds = entity.RenderBehavior.Texture.Bounds;
-                    bounds.Offset((int)-origin.X, (int)-origin.Y);
+                    var bounds = entity.RenderBehavior.BoundingRectangle;
                     bounds.Offset((int)Position.X, (int)Position.Y);
                     return bounds;
                 }
