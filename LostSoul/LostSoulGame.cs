@@ -67,7 +67,7 @@ namespace LostSoul
 
             background = new Background(this);
             player = new Player(this);
-            player.Position = new Vector2(PlayField.Width / 2, PlayField.Height / 2);
+            player.Position = new Vector2(PlayField.Center.X, PlayField.Center.Y);
 
             enemySpawner = new LostSoulSpawner(this);
 
