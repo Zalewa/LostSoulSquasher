@@ -16,6 +16,8 @@ namespace LostSoul
         public readonly Rectangle PlayField = new Rectangle(0, 0, 640, 480);
 
         private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager Graphics { get { return graphics; } }
+
         public SpriteBatch SpriteBatch;
         public ContentLoader ContentLoader = new ContentLoader();
         public int Score;
@@ -39,6 +41,19 @@ namespace LostSoul
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             //IsFixedTimeStep = false;
+
+            Activated += OnActivatedHandler;
+            Deactivated += OnDeactivatedHandler;
+        }
+
+        void OnActivatedHandler(object sender, EventArgs e)
+        {
+            IsMouseVisible = false;
+        }
+
+        void OnDeactivatedHandler(object sender, EventArgs e)
+        {
+            IsMouseVisible = true;
         }
 
         public void AddActor(Entity entity)
@@ -70,9 +85,6 @@ namespace LostSoul
             player.Position = new Vector2(PlayField.Center.X, PlayField.Center.Y);
 
             enemySpawner = new LostSoulSpawner(this);
-
-            Vector2 mousePosition = ProjectGameCoordsToScreenCoords(player.Position);
-            Mouse.SetPosition((int)mousePosition.X, (int)mousePosition.Y);
         }
 
         protected override void UnloadContent()
