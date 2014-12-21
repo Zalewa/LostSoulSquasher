@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace LostSoul
             soundRequests.Add(request);
         }
 
+
         public void FireSounds()
         {
             soundRequests.ForEach(e => FireSound(e));
@@ -46,6 +48,17 @@ namespace LostSoul
             instance.Pan = MathHelper.Clamp(relative.X / PanDivisor, -PanClamp, PanClamp);
             instance.Pitch = 0.5f - (float)random.NextDouble();
             instance.Play();
+        }
+
+        public void PlayMusic(Song song)
+        {
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+        }
+
+        public void StopMusic()
+        {
+            MediaPlayer.Stop();
         }
     }
 }

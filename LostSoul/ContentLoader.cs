@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace LostSoul
         public SpriteFont Font;
 
         public SoundEffect ExplosionSound;
+
+        public Song Ambient1;
 
         public void LoadContent(ContentManager content)
         {
@@ -46,6 +49,7 @@ namespace LostSoul
             Font = content.Load<SpriteFont>("Miramonte");
 
             ExplosionSound = content.Load<SoundEffect>("DSBAREXP");
+            Ambient1 = content.Load<Song>("Carefree");
         }
     }
 }
