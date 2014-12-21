@@ -10,11 +10,4 @@ namespace LostSoul
     {
         public abstract void Run(GameTime gameTime, Entity entity);
     }
-
-    public class NullBehavior : Behavior
-    {
-        public override void Run(GameTime gameTime, Entity entity)
-        {
-        }
-    }
 }
