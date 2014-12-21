@@ -51,7 +51,7 @@ namespace LostSoul
             Edge edge = PickEdge();
             var soul = new LostSoul(entity.Game);
             soul.Position = PickLocation(entity.Game, edge);
-            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, edge);
+            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, soul.Position);
             soul.ExpiredChanged += OnSoulExpired;
             souls.Add(soul);
             entity.Game.AddActor(soul);
@@ -79,26 +79,21 @@ namespace LostSoul
             }
         }
 
-        private Vector2 PickVelocity(LostSoulGame game, Edge edge)
+        private Vector2 PickVelocity(LostSoulGame game, Vector2 position)
         {
             float speed = 30.0f * DifficultySpeedFactor;
             if (random.NextDouble() < ChanceOfFasterSpeed)
             {
                 speed *= 2.0f;
             }
-            switch (edge)
-            {
-                case Edge.Left:
-                    return new Vector2(speed, 0.0f);
-                case Edge.Right:
-                    return new Vector2(-speed, 0.0f);
-                case Edge.Top:
-                    return new Vector2(0.0f, speed);
-                case Edge.Bottom:
-                    return new Vector2(0.0f, -speed);
-                default:
-                    throw new NotImplementedException("unknown edge " + edge);
-            }
+            float angle = MathHelper.ToRadians(22.5f - (45.0f * (float)random.NextDouble()));
+            Vector2 diff = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y) - position;
+            diff = Vector2.Normalize(diff);
+            Vector2 rotated = new Vector2() {
+                X = (float)(diff.X * Math.Cos(angle) - diff.Y * Math.Sin(angle)),
+                Y = (float)(diff.Y * Math.Cos(angle) + diff.X * Math.Sin(angle))
+            };
+            return rotated * speed;
         }
 
         private Edge PickEdge()
