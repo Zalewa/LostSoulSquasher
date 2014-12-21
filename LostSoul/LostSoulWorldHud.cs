@@ -17,10 +17,12 @@ namespace LostSoul
         private HudElementText lostSoulsLabel;
 
         private Color textColor = Color.Red;
+        private Color gameOverTextColor = Color.White;
 
         public LostSoulWorldHud(LostSoulWorld world)
         {
             this.world = world;
+            world.GameOverChanged += OnGameOverChangedHandler;
             root = new HudElement(world.Game);
 
             setupGameHud(world);
@@ -59,7 +61,7 @@ namespace LostSoul
             var position = center - label.RenderBehavior.Size / 2.0f;
             position.Y -= label.RenderBehavior.Size.Y;
             label.BodyBehavior.Position = position;
-            label.Color = textColor;
+            label.Color = gameOverTextColor;
             gameOverHud.AddChild(label);
         }
 
@@ -70,14 +72,12 @@ namespace LostSoul
             var position = center - label.RenderBehavior.Size / 2.0f;
             position.Y += label.RenderBehavior.Size.Y;
             label.BodyBehavior.Position = position;
-            label.Color = textColor;
+            label.Color = gameOverTextColor;
             gameOverHud.AddChild(label);
         }
 
         public void Update(GameTime gameTime)
         {
-            gameHud.Visible = !world.IsGameOver();
-            gameOverHud.Visible = world.IsGameOver();
             scoreLabel.Text = "Score: " + world.Score;
             lostSoulsLabel.Text = "Lost souls: " + world.LostEnemies + " of " + world.MaxLostSouls;
 
@@ -87,6 +87,23 @@ namespace LostSoul
         public void Draw(GameTime gameTime)
         {
             root.Draw(gameTime);
+        }
+
+        void OnGameOverChangedHandler(object sender, EventArgs e)
+        {
+            var world = (LostSoulWorld)sender;
+            gameHud.Visible = !world.IsGameOver();
+            gameOverHud.Visible = world.IsGameOver();
+            if (world.IsGameOver())
+            {
+                scoreLabel.Color = gameOverTextColor;
+                gameOverHud.AddChild(scoreLabel);
+            }
+            else
+            {
+                scoreLabel.Color = textColor;
+                gameHud.AddChild(scoreLabel);
+            }
         }
     }
 }

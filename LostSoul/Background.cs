@@ -12,7 +12,8 @@ namespace LostSoul
             : base(game)
         {
             bodyBehavior = new BodyBehavior(this);
-            this.renderBehavior = new SpriteRenderBehavior(game, game.ContentLoader.Background);
+            renderBehavior = new SpriteRenderBehavior(game, game.ContentLoader.Backgrounds[2]);
+            animationBehavior = new BackgroundAnimationBehavior(this);
         }
     }
 }

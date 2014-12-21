@@ -10,7 +10,8 @@ namespace LostSoul
 {
     public class ContentLoader
     {
-        public Texture2D Background;
+        public Texture2D[] Backgrounds;
+        public Texture2D GameOverBackground;
         public Texture2D SkullLeft;
         public Texture2D SkullRight;
         public Texture2D Crosshair;
@@ -23,7 +24,14 @@ namespace LostSoul
 
         public void LoadContent(ContentManager content)
         {
-            Background = content.Load<Texture2D>("background");
+            Backgrounds = new Texture2D[] {
+                content.Load<Texture2D>("backgrounds/bg1"),
+                content.Load<Texture2D>("backgrounds/bg2"),
+                content.Load<Texture2D>("backgrounds/bg3"),
+                content.Load<Texture2D>("backgrounds/bg4"),
+                content.Load<Texture2D>("backgrounds/bg5")
+            };
+            GameOverBackground = content.Load<Texture2D>("backgrounds/gameover1");
             SkullLeft = content.Load<Texture2D>("SKUL_left");
             SkullRight = content.Load<Texture2D>("SKUL");
             Crosshair = content.Load<Texture2D>("crosshair");

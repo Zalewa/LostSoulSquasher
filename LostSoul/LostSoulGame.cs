@@ -41,6 +41,7 @@ namespace LostSoul
         public void ResetGame()
         {
             world = new LostSoulWorld(this);
+            world.LoadContent();
         }
 
         void OnActivatedHandler(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace LostSoul
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             ContentLoader.LoadContent(Content);
 
-            world = new LostSoulWorld(this);
+            ResetGame();
         }
 
         protected override void UnloadContent()

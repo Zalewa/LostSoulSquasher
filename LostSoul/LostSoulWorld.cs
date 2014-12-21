@@ -9,6 +9,8 @@ namespace LostSoul
 {
     public class LostSoulWorld
     {
+        public event EventHandler GameOverChanged;
+
         private LostSoulGame game;
         public LostSoulGame Game { get { return game; } }
 
@@ -32,7 +34,10 @@ namespace LostSoul
         public LostSoulWorld(LostSoulGame game)
         {
             this.game = game;
+        }
 
+        public void LoadContent()
+        {
             hud = new LostSoulWorldHud(this);
 
             background = new Background(game);
@@ -40,7 +45,6 @@ namespace LostSoul
             player.BodyBehavior.Position = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
 
             enemySpawner = new LostSoulSpawner(game);
-
         }
 
         public void Update(GameTime gameTime)
@@ -105,6 +109,7 @@ namespace LostSoul
             player.Expired = true;
             enemySpawner.Expired = true;
             actors.ForEach(e => e.Expired = true);
+            OnGameOverChanged();
         }
 
         public void RegisterCollision(CollisionBehavior collisionBehavior)
@@ -158,6 +163,14 @@ namespace LostSoul
             get
             {
                 return game.ContentLoader.Font;
+            }
+        }
+
+        private void OnGameOverChanged()
+        {
+            if (GameOverChanged != null)
+            {
+                GameOverChanged(this, EventArgs.Empty);
             }
         }
     }

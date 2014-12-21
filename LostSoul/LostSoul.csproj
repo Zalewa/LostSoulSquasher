@@ -42,6 +42,7 @@
     <Compile Include="AnimationFrame.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="BackgroundAnimationBehavior.cs" />
     <Compile Include="Behavior.cs" />
     <Compile Include="BodyBehavior.cs" />
     <Compile Include="HudElement.cs" />
