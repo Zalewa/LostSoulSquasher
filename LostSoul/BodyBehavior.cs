@@ -44,7 +44,7 @@ namespace LostSoul
         {
             get
             {
-                if (entity.HasRenderBehavior)
+                if (entity.RenderBehavior != null)
                 {
                     var origin = entity.RenderBehavior.Origin;
                     var bounds = entity.RenderBehavior.Texture.Bounds;

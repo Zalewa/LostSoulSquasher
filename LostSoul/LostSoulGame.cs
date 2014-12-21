@@ -38,6 +38,11 @@ namespace LostSoul
             Deactivated += OnDeactivatedHandler;
         }
 
+        public void ResetGame()
+        {
+            world = new LostSoulWorld(this);
+        }
+
         void OnActivatedHandler(object sender, EventArgs e)
         {
             IsMouseVisible = false;

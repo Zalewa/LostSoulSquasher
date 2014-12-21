@@ -40,7 +40,7 @@ namespace LostSoul
         {
             foreach (Entity colliding in CollisionBehavior.Colliding)
             {
-                if (colliding.HasHealthBehavior)
+                if (colliding.HealthBehavior != null)
                 {
                     colliding.HealthBehavior.Damage();
                 }

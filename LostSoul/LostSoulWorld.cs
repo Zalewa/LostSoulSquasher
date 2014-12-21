@@ -159,7 +159,7 @@ namespace LostSoul
             foreach (Entity actor in expiredActors)
             {
                 actors.Remove(actor);
-                if (actor.HasCollisionBehavior)
+                if (actor.CollisionBehavior != null)
                 {
                     collisions.Remove(actor.CollisionBehavior);
                 }

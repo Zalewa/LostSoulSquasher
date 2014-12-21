@@ -11,14 +11,14 @@ namespace LostSoul
     {
         private LostSoulGame game;
 
-        protected Behavior bodyBehavior = new NullBehavior();
-        protected Behavior inputBehavior = new NullBehavior();
-        protected Behavior actionBehavior = new NullBehavior();
-        protected Behavior renderBehavior = new NullBehavior();
-        protected Behavior animationBehavior = new NullBehavior();
-        protected Behavior movementBehavior = new NullBehavior();
-        protected Behavior collisionBehavior = new NullBehavior();
-        protected Behavior healthBehavior = new NullBehavior();
+        protected BodyBehavior bodyBehavior = null;
+        protected Behavior inputBehavior = null;
+        protected Behavior actionBehavior = null;
+        protected RenderBehavior renderBehavior = null;
+        protected Behavior animationBehavior = null;
+        protected MovementBehavior movementBehavior = null;
+        protected CollisionBehavior collisionBehavior = null;
+        protected HealthBehavior healthBehavior = null;
 
         public event EventHandler ExpiredChanged;
 
@@ -48,22 +48,14 @@ namespace LostSoul
 
         public BodyBehavior BodyBehavior
         {
-            get { return (BodyBehavior)bodyBehavior;  }
+            get { return bodyBehavior;  }
         }
 
         public RenderBehavior RenderBehavior
         {
             get
             {
-                return (RenderBehavior)renderBehavior;
-            }
-        }
-
-        public bool HasRenderBehavior
-        {
-            get
-            {
-                return renderBehavior is RenderBehavior;
+                return renderBehavior;
             }
         }
 
@@ -71,7 +63,7 @@ namespace LostSoul
         {
             get
             {
-                return (MovementBehavior)movementBehavior;
+                return movementBehavior;
             }
         }
 
@@ -79,15 +71,7 @@ namespace LostSoul
         {
             get
             {
-                return (CollisionBehavior)collisionBehavior;
-            }
-        }
-
-        public bool HasCollisionBehavior
-        {
-            get
-            {
-                return collisionBehavior is CollisionBehavior;
+                return collisionBehavior;
             }
         }
 
@@ -99,8 +83,6 @@ namespace LostSoul
             }
         }
 
-        public bool HasHealthBehavior { get { return healthBehavior is HealthBehavior; } }
-
         public Entity(LostSoulGame game)
         {
             this.game = game;
@@ -108,18 +90,30 @@ namespace LostSoul
 
         public virtual void Update(GameTime gameTime)
         {
-            bodyBehavior.Run(gameTime, this);
-            inputBehavior.Run(gameTime, this);
-            actionBehavior.Run(gameTime, this);
-            healthBehavior.Run(gameTime, this);
-            movementBehavior.Run(gameTime, this);
-            animationBehavior.Run(gameTime, this);
-            collisionBehavior.Run(gameTime, this);
+            var behaviors = new Behavior[] {
+                bodyBehavior,
+                inputBehavior,
+                actionBehavior,
+                healthBehavior,
+                movementBehavior,
+                animationBehavior,
+                collisionBehavior
+            };
+            foreach (var behavior in behaviors)
+            {
+                if (behavior != null)
+                {
+                    behavior.Run(gameTime, this);
+                }
+            }
         }
 
         public void Draw(GameTime gameTime)
         {
-            renderBehavior.Run(gameTime, this);
+            if (renderBehavior != null)
+            {
+                renderBehavior.Run(gameTime, this);
+            }
         }
 
         private void OnExpiredChanged()

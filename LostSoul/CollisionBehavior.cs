@@ -60,7 +60,7 @@ namespace LostSoul
         {
             return us != other && Enabled
                 && !us.Expired && !other.Expired
-                && other.HasCollisionBehavior
+                && other.CollisionBehavior != null
                 && other.CollisionBehavior.Enabled
                 && !colliding.Contains(other);
         }
