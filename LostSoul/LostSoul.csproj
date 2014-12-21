@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnimationBehavior.cs" />
+    <Compile Include="AnimationFrame.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Behavior.cs" />
