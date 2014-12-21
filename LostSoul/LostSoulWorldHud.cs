@@ -127,7 +127,7 @@ namespace LostSoul
         public void Update(GameTime gameTime)
         {
             scoreLabel.Text = "Score: " + world.Score;
-            lostSoulsLabel.Text = "Lost souls: " + world.LostEnemies + " of " + world.MaxLostSouls;
+            lostSoulsLabel.Text = "Lives: " + world.Lives;
 
             root.Update(gameTime);
         }

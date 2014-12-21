@@ -9,6 +9,8 @@ namespace LostSoul
 {
     public class LostSoulWorld : Entity
     {
+        public const int StartingLives = 10;
+
         public event EventHandler GameOverChanged;
 
         private LostSoulWorldHud hud;
@@ -23,12 +25,11 @@ namespace LostSoul
         private List<Entity> actors = new List<Entity>();
         private List<Entity> expiredActors = new List<Entity>();
 
-        private int lostEnemies = 0;
-        public int LostEnemies { get { return lostEnemies; } }
+        private int lives = StartingLives;
+        public int Lives { get { return lives; } }
 
         private List<CollisionBehavior> collisions = new List<CollisionBehavior>();
 
-        public int MaxLostSouls = 10;
         public int Score;
         public List<Entity> Actors { get { return actors; } }
 
@@ -102,8 +103,8 @@ namespace LostSoul
 
         public void IncrementLostEnemy()
         {
-            ++lostEnemies;
-            if (IsTooManyLost())
+            --lives;
+            if (!HasLives())
             {
                 GoToGameOver();
             }
@@ -147,12 +148,12 @@ namespace LostSoul
 
         public bool IsGameOver()
         {
-            return IsTooManyLost();
+            return !HasLives();
         }
 
-        private bool IsTooManyLost()
+        private bool HasLives()
         {
-            return lostEnemies >= MaxLostSouls;
+            return lives > 0;
         }
 
         private SpriteBatch SpriteBatch
