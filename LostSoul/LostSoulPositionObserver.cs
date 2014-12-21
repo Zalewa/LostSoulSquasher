@@ -22,7 +22,7 @@ namespace LostSoul
             {
                 if (wasInPlayfield)
                 {
-                    entity.Game.World.IncrementLostEnemy();
+                    entity.Game.World.AddLives(-1);
                     entity.Expired = true;
                 }
             }

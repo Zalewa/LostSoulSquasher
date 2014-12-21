@@ -18,7 +18,7 @@ namespace LostSoul
     {
         public void Activate(LostSoulWorld world)
         {
-            throw new NotImplementedException();
+            world.AddLives(1);
         }
 
         public RenderBehavior MkRender(Entity entity)

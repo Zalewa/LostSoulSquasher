@@ -101,9 +101,9 @@ namespace LostSoul
             actors.Add(entity);
         }
 
-        public void IncrementLostEnemy()
+        public void AddLives(int amount)
         {
-            --lives;
+            lives += amount;
             if (!HasLives())
             {
                 GoToGameOver();

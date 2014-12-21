@@ -29,6 +29,7 @@ namespace LostSoul
         void OnDeathHandler(object sender, EventArgs e)
         {
             bonusClass.Activate(Game.World);
+            Expired = true;
         }
     }
 }
