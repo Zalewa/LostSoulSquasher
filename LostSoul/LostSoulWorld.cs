@@ -26,7 +26,7 @@ namespace LostSoul
 
         private List<CollisionBehavior> collisions = new List<CollisionBehavior>();
 
-        public int MaxLostSouls = 1;
+        public int MaxLostSouls = 10;
         public int Score;
         public List<Entity> Actors { get { return actors; } }
 
