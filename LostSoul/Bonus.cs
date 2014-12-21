@@ -19,6 +19,7 @@ namespace LostSoul
             bodyBehavior.Size = new Vector2(32.0f, 32.0f);
 
             renderBehavior = bonusClass.MkRender(this);
+            renderBehavior.CenterOrigin();
 
             healthBehavior = new HealthBehavior(this);
             healthBehavior.DeathEvent += OnDeathHandler;
