@@ -17,7 +17,7 @@ namespace LostSoul
         private const int MaxSpawns = 5;
         private const double ChanceOfSingularSpawn = 0.7;
         private const double ChanceOfFasterSpeed = 0.1;
-        private const float DifficultySpeedMultiplier = 0.2f;
+        private const float DifficultySpeedMultiplier = 0.1f;
         private const float SpawnCountdownDifficultyDivisor = 1000.0f;
         private const float MinSpawnCountdown = 0.2f;
         private const float SpawnCountIncreaseInterval = 20.0f;
