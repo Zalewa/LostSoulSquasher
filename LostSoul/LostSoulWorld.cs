@@ -14,6 +14,8 @@ namespace LostSoul
         private LostSoulWorldHud hud;
 
         private Background background;
+        public Background Background { get { return background; } }
+
         private Player player;
         private LostSoulSpawner enemySpawner;
         private List<Entity> actors = new List<Entity>();

@@ -32,6 +32,10 @@ namespace LostSoul
             {
                 world.Game.Exit();
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.OemCloseBrackets) && oldKeyboardState.IsKeyUp(Keys.OemCloseBrackets))
+            {
+                world.Background.CycleBackground();
+            }
             oldMouseState = Mouse.GetState();
             oldKeyboardState = Keyboard.GetState();
         }
