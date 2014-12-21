@@ -71,6 +71,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderBehavior.cs" />
+    <Compile Include="RenderDependentBodyBehavior.cs" />
     <Compile Include="SpriteRenderBehavior.cs" />
     <Compile Include="TextRenderBehavior.cs" />
   </ItemGroup>

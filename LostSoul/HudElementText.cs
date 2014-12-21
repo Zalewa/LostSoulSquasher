@@ -11,6 +11,7 @@ namespace LostSoul
         public HudElementText(LostSoulGame game, string text = "")
             : base(game)
         {
+            bodyBehavior = new RenderDependentBodyBehavior(this);
             renderBehavior = new TextRenderBehavior(Game, text);
         }
 

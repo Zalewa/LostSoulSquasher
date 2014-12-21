@@ -40,7 +40,7 @@ namespace LostSoul
             }
         }
 
-        public Vector2 Size { get; set; }
+        public virtual Vector2 Size { get; set; }
         public abstract Rectangle BoundingRectangle { get; }
 
         public Entity Entity
