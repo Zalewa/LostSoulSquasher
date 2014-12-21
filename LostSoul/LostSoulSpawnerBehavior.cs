@@ -119,7 +119,9 @@ namespace LostSoul
         {
             get
             {
-                return MathHelper.Clamp((int)(difficulty / SpawnCountIncreaseInterval), MinSpawns, MaxSpawns);
+                return Math.Min(Math.Max(
+                    (int)(difficulty / SpawnCountIncreaseInterval),
+                    MinSpawns), MaxSpawns);
             }
         }
     }

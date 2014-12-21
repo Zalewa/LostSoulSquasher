@@ -37,15 +37,13 @@
     <MonoGamePlatform>PSM</MonoGamePlatform>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.EffectImporter" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.FBXImporter" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.TextureImporter" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.XImporter" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.AudioImporters" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters" />
-    <Reference Include="MonoGameContentProcessors">
-      <HintPath>$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGameContentProcessors.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SKUL.png">

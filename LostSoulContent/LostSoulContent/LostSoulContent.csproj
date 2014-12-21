@@ -15,7 +15,7 @@
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <OutputPath>bin\$(Configuration)</OutputPath>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>61cdc4bd-2575-4294-846a-2160eb353222</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
     <PlatformTarget>x86</PlatformTarget>

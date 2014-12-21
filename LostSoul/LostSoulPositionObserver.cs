@@ -17,7 +17,8 @@ namespace LostSoul
         public void HandlePositionChanged(object sender, EventArgs args)
         {
             LostSoul entity = (LostSoul)((BodyBehavior)sender).Entity;
-            if (!entity.Game.PlayField.Contains(entity.BodyBehavior.Position))
+            var pos = entity.BodyBehavior.Position;
+            if (!entity.Game.PlayField.Contains((int)pos.X, (int)pos.Y))
             {
                 if (wasInPlayfield)
                 {

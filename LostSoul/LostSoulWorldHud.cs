@@ -69,7 +69,10 @@ namespace LostSoul
                 center.X - size.X / 2.0f,
                 center.Y - size.Y / 2.0f);
             var render = new PrimitiveRectangleRenderBehavior(gameOverTextBackground);
-            render.Color = new Color(Color.Black, 0.8f);
+
+            var color = Color.Black;
+            color.A = (int)(255.0 * 0.8);
+            render.Color = color;
             gameOverTextBackground.RenderBehavior = render;
             gameOverHud.AddChild(gameOverTextBackground);
         }
