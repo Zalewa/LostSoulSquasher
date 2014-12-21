@@ -44,6 +44,8 @@
     <Compile Include="Background.cs" />
     <Compile Include="Behavior.cs" />
     <Compile Include="BodyBehavior.cs" />
+    <Compile Include="HudElement.cs" />
+    <Compile Include="HudElementText.cs" />
     <Compile Include="LostSoulWorld.cs" />
     <Compile Include="CollisionBehavior.cs" />
     <Compile Include="ContentLoader.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="LostSoulPositionObserver.cs" />
     <Compile Include="LostSoulSpawner.cs" />
     <Compile Include="LostSoulSpawnerBehavior.cs" />
+    <Compile Include="LostSoulWorldHud.cs" />
     <Compile Include="MovementBehavior.cs" />
     <Compile Include="PlayerActionBehavior.cs" />
     <Compile Include="PlayerInputBehavior.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderBehavior.cs" />
     <Compile Include="SpriteRenderBehavior.cs" />
+    <Compile Include="TextRenderBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -108,7 +108,7 @@ namespace LostSoul
             }
         }
 
-        public void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             if (renderBehavior != null)
             {
