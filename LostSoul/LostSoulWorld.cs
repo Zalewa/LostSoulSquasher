@@ -7,12 +7,9 @@ using System.Text;
 
 namespace LostSoul
 {
-    public class LostSoulWorld
+    public class LostSoulWorld : Entity
     {
         public event EventHandler GameOverChanged;
-
-        private LostSoulGame game;
-        public LostSoulGame Game { get { return game; } }
 
         private LostSoulWorldHud hud;
 
@@ -32,22 +29,22 @@ namespace LostSoul
         public List<Entity> Actors { get { return actors; } }
 
         public LostSoulWorld(LostSoulGame game)
+            : base(game)
         {
-            this.game = game;
         }
 
         public void LoadContent()
         {
             hud = new LostSoulWorldHud(this);
 
-            background = new Background(game);
-            player = new Player(game);
-            player.BodyBehavior.Position = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
+            background = new Background(Game);
+            player = new Player(Game);
+            player.BodyBehavior.Position = new Vector2(Game.PlayField.Center.X, Game.PlayField.Center.Y);
 
-            enemySpawner = new LostSoulSpawner(game);
+            enemySpawner = new LostSoulSpawner(Game);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             background.Update(gameTime);
             if (!player.Expired)
@@ -70,11 +67,12 @@ namespace LostSoul
             ClearCollisions();
             RemoveExpiredActors();
             hud.Update(gameTime);
+            base.Update(gameTime);
         }
 
-        public void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
-            Matrix scaleMatrix = game.GetScaleMatrix();
+            Matrix scaleMatrix = Game.GetScaleMatrix();
             SpriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scaleMatrix);
             background.Draw(gameTime);
             foreach (Entity actor in actors)
@@ -88,6 +86,7 @@ namespace LostSoul
 
             hud.Draw(gameTime);
             SpriteBatch.End();
+            base.Draw(gameTime);
         }
 
         public void AddActor(Entity entity)
@@ -154,7 +153,7 @@ namespace LostSoul
         {
             get
             {
-                return game.SpriteBatch;
+                return Game.SpriteBatch;
             }
         }
 
@@ -162,7 +161,7 @@ namespace LostSoul
         {
             get
             {
-                return game.ContentLoader.Font;
+                return Game.ContentLoader.Font;
             }
         }
 
