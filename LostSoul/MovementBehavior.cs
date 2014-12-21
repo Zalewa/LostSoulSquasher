@@ -17,7 +17,7 @@ namespace LostSoul
 
         public override void Run(GameTime gameTime, Entity entity)
         {
-            entity.Position += Vector2.Multiply(Velocity, (float)gameTime.ElapsedGameTime.TotalSeconds);
+            entity.BodyBehavior.Position += Vector2.Multiply(Velocity, (float)gameTime.ElapsedGameTime.TotalSeconds);
         }
     }
 }

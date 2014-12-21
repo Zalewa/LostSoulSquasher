@@ -13,6 +13,7 @@ namespace LostSoul
         public Explosion(LostSoulGame game)
             : base(game)
         {
+            bodyBehavior = new BodyBehavior(this);
             renderBehavior = new RenderBehavior(game, game.ContentLoader.Explosion[0]);
             var animationBehavior = new AnimationBehavior(AnimationFrame.MkCentered(game.ContentLoader.Explosion), 0.1f);
             animationBehavior.MarkEntityAsExpiredWhenDone = true;
@@ -26,7 +27,7 @@ namespace LostSoul
             base.Update(gameTime);
             if (!afterFirstUpdate)
             {
-                Game.Audio.PlaySound(Game.ContentLoader.ExplosionSound, Position);
+                Game.Audio.PlaySound(Game.ContentLoader.ExplosionSound, BodyBehavior.Position);
                 afterFirstUpdate = true;
             }
             else

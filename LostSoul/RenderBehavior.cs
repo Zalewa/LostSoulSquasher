@@ -23,7 +23,7 @@ namespace LostSoul
 
         public override void Run(GameTime gameTime, Entity entity)
         {
-            game.SpriteBatch.Draw(Texture, entity.Position, null, Color.White, 0.0f, Origin, 1.0f, SpriteEffects.None, 0.0f);
+            game.SpriteBatch.Draw(Texture, entity.BodyBehavior.Position, null, Color.White, 0.0f, Origin, 1.0f, SpriteEffects.None, 0.0f);
         }
     }
 }

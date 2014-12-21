@@ -11,6 +11,7 @@ namespace LostSoul
         public Background(LostSoulGame game)
             : base(game)
         {
+            bodyBehavior = new BodyBehavior(this);
             this.renderBehavior = new RenderBehavior(game, game.ContentLoader.Background);
         }
     }

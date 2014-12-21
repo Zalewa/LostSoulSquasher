@@ -11,13 +11,13 @@ namespace LostSoul
 
         public LostSoulPositionObserver(LostSoul entity)
         {
-            entity.PositionChanged += HandlePositionChanged;
+            entity.BodyBehavior.PositionChanged += HandlePositionChanged;
         }
 
         public void HandlePositionChanged(object sender, EventArgs args)
         {
-            LostSoul entity = (LostSoul)sender;
-            if (!entity.Game.PlayField.Contains(entity.Position))
+            LostSoul entity = (LostSoul)((BodyBehavior)sender).Entity;
+            if (!entity.Game.PlayField.Contains(entity.BodyBehavior.Position))
             {
                 if (wasInPlayfield)
                 {

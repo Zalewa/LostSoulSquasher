@@ -51,12 +51,12 @@ namespace LostSoul
         private void ProcessMouseMovement(Entity entity)
         {
             Point delta = Mouse.GetState().Position - oldState.Position;
-            var newPosition = entity.Position + new Vector2(delta.X, delta.Y);
+            var newPosition = entity.BodyBehavior.Position + new Vector2(delta.X, delta.Y);
             var playfield = game.PlayField;
             newPosition = Vector2.Clamp(newPosition,
                 new Vector2(playfield.Left, playfield.Top),
                 new Vector2(playfield.Right, playfield.Bottom));
-            entity.Position = newPosition;
+            entity.BodyBehavior.Position = newPosition;
         }
     }
 }

@@ -50,8 +50,8 @@ namespace LostSoul
         {
             Edge edge = PickEdge();
             var soul = new LostSoul(entity.Game);
-            soul.Position = PickLocation(entity.Game, edge);
-            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, soul.Position);
+            soul.BodyBehavior.Position = PickLocation(entity.Game, edge);
+            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, soul.BodyBehavior.Position);
             soul.ExpiredChanged += OnSoulExpired;
             souls.Add(soul);
             entity.Game.World.AddActor(soul);

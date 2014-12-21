@@ -11,6 +11,7 @@ namespace LostSoul
     {
         private LostSoulGame game;
 
+        protected Behavior bodyBehavior = new NullBehavior();
         protected Behavior inputBehavior = new NullBehavior();
         protected Behavior actionBehavior = new NullBehavior();
         protected Behavior renderBehavior = new NullBehavior();
@@ -19,38 +20,7 @@ namespace LostSoul
         protected Behavior collisionBehavior = new NullBehavior();
         protected Behavior healthBehavior = new NullBehavior();
 
-        public event EventHandler PositionChanged;
         public event EventHandler ExpiredChanged;
-
-        private Vector2 position;
-        public Vector2 Position
-        {
-            get
-            {
-                return position;
-            }
-            set
-            {
-                position = value;
-                OnPositionChanged();
-            }
-        }
-
-        public Rectangle BoundingRectangle
-        {
-            get
-            {
-                if (HasRenderBehavior)
-                {
-                    var origin = RenderBehavior.Origin;
-                    var bounds = RenderBehavior.Texture.Bounds;
-                    bounds.Offset((int)-origin.X, (int)-origin.Y);
-                    bounds.Offset((int)Position.X, (int)Position.Y);
-                    return bounds;
-                }
-                return Rectangle.Empty;
-            }
-        }
 
         public bool Firing { get; set; }
 
@@ -74,6 +44,11 @@ namespace LostSoul
             {
                 return game;
             }
+        }
+
+        public BodyBehavior BodyBehavior
+        {
+            get { return (BodyBehavior)bodyBehavior;  }
         }
 
         public RenderBehavior RenderBehavior
@@ -133,6 +108,7 @@ namespace LostSoul
 
         public virtual void Update(GameTime gameTime)
         {
+            bodyBehavior.Run(gameTime, this);
             inputBehavior.Run(gameTime, this);
             actionBehavior.Run(gameTime, this);
             healthBehavior.Run(gameTime, this);
@@ -144,14 +120,6 @@ namespace LostSoul
         public void Draw(GameTime gameTime)
         {
             renderBehavior.Run(gameTime, this);
-        }
-
-        private void OnPositionChanged()
-        {
-            if (PositionChanged != null)
-            {
-                PositionChanged(this, EventArgs.Empty);
-            }
         }
 
         private void OnExpiredChanged()

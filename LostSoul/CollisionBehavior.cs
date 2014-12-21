@@ -28,7 +28,7 @@ namespace LostSoul
 
         public bool Collides(Entity e1, Entity e2)
         {
-            return e1.BoundingRectangle.Intersects(e2.BoundingRectangle);
+            return e1.BodyBehavior.BoundingRectangle.Intersects(e2.BodyBehavior.BoundingRectangle);
         }
 
         public override void Run(GameTime gameTime, Entity entity)

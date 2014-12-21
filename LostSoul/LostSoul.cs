@@ -13,6 +13,8 @@ namespace LostSoul
         public LostSoul(LostSoulGame game)
             : base(game)
         {
+            bodyBehavior = new BodyBehavior(this);
+
             renderBehavior = new RenderBehavior(game, game.ContentLoader.SkullLeft);
             RenderBehavior.Origin = new Vector2(RenderBehavior.Texture.Width / 2, RenderBehavior.Texture.Height / 2);
 

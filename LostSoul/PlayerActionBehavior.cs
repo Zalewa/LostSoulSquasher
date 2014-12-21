@@ -32,7 +32,7 @@ namespace LostSoul
         private void Fire(Entity entity)
         {
             var boomActor = new Explosion(entity.Game);
-            boomActor.Position = entity.Position;
+            boomActor.BodyBehavior.Position = entity.BodyBehavior.Position;
             entity.Game.World.AddActor(boomActor);
         }
 

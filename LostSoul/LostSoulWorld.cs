@@ -29,7 +29,7 @@ namespace LostSoul
             this.game = game;
             background = new Background(game);
             player = new Player(game);
-            player.Position = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
+            player.BodyBehavior.Position = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
 
             enemySpawner = new LostSoulSpawner(game);
 
