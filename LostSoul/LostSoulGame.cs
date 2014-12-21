@@ -20,9 +20,10 @@ namespace LostSoul
 
         public SpriteBatch SpriteBatch;
         public ContentLoader ContentLoader = new ContentLoader();
-        public AudioSystem Audio { get { return audio; } }
 
         private AudioSystem audio;
+        public AudioSystem Audio { get { return audio; } }
+
         private LostSoulWorld world;
         public LostSoulWorld World { get { return world; } }
 
@@ -56,11 +57,11 @@ namespace LostSoul
 
         protected override void Initialize()
         {
-            base.Initialize();
             audio = new AudioSystem();
             audio.ListenerPosition = new Vector2(PlayField.Center.X, PlayField.Center.Y);
             audio.PanDivisor = PlayField.Width / 2;
             audio.PanClamp = 0.9f;
+            base.Initialize();
         }
 
         protected override void LoadContent()
