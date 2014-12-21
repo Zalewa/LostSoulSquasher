@@ -13,18 +13,36 @@ namespace LostSoul
             Left, Right, Top, Bottom
         }
 
+        private const int MinSpawns = 1;
+        private const int MaxSpawns = 5;
+        private const double ChanceOfSingularSpawn = 0.7;
+        private const double ChanceOfFasterSpeed = 0.1;
+        private const float DifficultySpeedMultiplier = 0.2f;
+        private const float SpawnCountdownDifficultyDivisor = 1000.0f;
+        private const float MinSpawnCountdown = 0.2f;
+        private const float SpawnCountIncreaseInterval = 20.0f;
+
         private Random random = new Random();
         private float countdownTillSpawn = 1.0f;
-        private int maxSouls = 1;
+        private float difficulty = 1.0f;
+        private int maxSouls = 30;
         private List<Entity> souls = new List<Entity>();
 
         public override void Run(GameTime gameTime, Entity entity)
         {
+            difficulty += (float)gameTime.ElapsedGameTime.TotalSeconds;
             countdownTillSpawn -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (shouldSpawn())
             {
-                spawn(entity);
-                countdownTillSpawn = 1.0f;
+                for (int i = 0; i < NumSimultaneousSpawns; ++i)
+                {
+                    spawn(entity);
+                    if (random.NextDouble() < ChanceOfSingularSpawn)
+                    {
+                        break;
+                    }
+                }
+                countdownTillSpawn = Math.Max(1.0f - (difficulty / SpawnCountdownDifficultyDivisor), MinSpawnCountdown);
             }
         }
 
@@ -63,7 +81,11 @@ namespace LostSoul
 
         private Vector2 pickVelocity(LostSoulGame game, Edge edge)
         {
-            float speed = 30.0f;
+            float speed = 30.0f * DifficultySpeedFactor;
+            if (random.NextDouble() < ChanceOfFasterSpeed)
+            {
+                speed *= 2.0f;
+            }
             switch (edge)
             {
                 case Edge.Left:
@@ -88,6 +110,22 @@ namespace LostSoul
         private bool shouldSpawn()
         {
             return countdownTillSpawn <= 0.0f && souls.Count < maxSouls;
+        }
+
+        private float DifficultySpeedFactor
+        {
+            get
+            {
+                return Math.Max(1.0f, difficulty * DifficultySpeedMultiplier);
+            }
+        }
+
+        private int NumSimultaneousSpawns
+        {
+            get
+            {
+                return MathHelper.Clamp((int)(difficulty / SpawnCountIncreaseInterval), MinSpawns, MaxSpawns);
+            }
         }
     }
 }
