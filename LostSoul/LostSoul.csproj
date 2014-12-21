@@ -60,6 +60,7 @@
     <Compile Include="LostSoulSpawner.cs" />
     <Compile Include="LostSoulSpawnerBehavior.cs" />
     <Compile Include="LostSoulWorldHud.cs" />
+    <Compile Include="LostSoulWorldInputBehavior.cs" />
     <Compile Include="MovementBehavior.cs" />
     <Compile Include="PlayerActionBehavior.cs" />
     <Compile Include="PlayerInputBehavior.cs" />

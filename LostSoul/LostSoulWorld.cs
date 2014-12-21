@@ -31,6 +31,7 @@ namespace LostSoul
         public LostSoulWorld(LostSoulGame game)
             : base(game)
         {
+            inputBehavior = new LostSoulWorldInputBehavior(this);
         }
 
         public void LoadContent()
