@@ -29,7 +29,8 @@ namespace LostSoul
                 content.Load<Texture2D>("backgrounds/bg2"),
                 content.Load<Texture2D>("backgrounds/bg3"),
                 content.Load<Texture2D>("backgrounds/bg4"),
-                content.Load<Texture2D>("backgrounds/bg5")
+                content.Load<Texture2D>("backgrounds/bg5"),
+                content.Load<Texture2D>("backgrounds/bg6")
             };
             GameOverBackground = content.Load<Texture2D>("backgrounds/gameover1");
             SkullLeft = content.Load<Texture2D>("SKUL_left");
