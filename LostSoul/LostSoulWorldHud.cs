@@ -13,6 +13,7 @@ namespace LostSoul
         private HudElement gameHud;
         private HudElement gameOverHud;
 
+        private HudElement gameOverTextBackground;
         private HudElementText scoreLabel;
         private HudElementText lostSoulsLabel;
 
@@ -24,6 +25,7 @@ namespace LostSoul
             this.world = world;
             world.GameOverChanged += OnGameOverChangedHandler;
             root = new HudElement(world.Game);
+            root.BodyBehavior.Size = new Vector2(world.Game.PlayField.Width, world.Game.PlayField.Height);
 
             setupGameHud(world);
             setupGameOverHud(world);
@@ -48,10 +50,28 @@ namespace LostSoul
         {
             gameOverHud = new HudElement(world.Game);
             gameOverHud.Visible = false;
+            gameOverHud.BodyBehavior.Size = root.BodyBehavior.Size;
             root.AddChild(gameOverHud);
 
+            setupGameOverTextBackground(world);
             setupGameOverText(world);
             setupGameOverInstructions(world);
+            adjustGameOverTextBackgroundSize();
+        }
+
+        private void setupGameOverTextBackground(LostSoulWorld world)
+        {
+            gameOverTextBackground = new HudElement(world.Game);
+            var center = gameOverHud.BodyBehavior.Size * 0.5f;
+            var size = new Vector2(200.0f, 200.0f);
+            gameOverTextBackground.BodyBehavior.Size = size;
+            gameOverTextBackground.BodyBehavior.Position = new Vector2(
+                center.X - size.X / 2.0f,
+                center.Y - size.Y / 2.0f);
+            var render = new PrimitiveRectangleRenderBehavior(gameOverTextBackground);
+            render.Color = new Color(Color.Black, 0.8f);
+            gameOverTextBackground.RenderBehavior = render;
+            gameOverHud.AddChild(gameOverTextBackground);
         }
 
         private void setupGameOverText(LostSoulWorld world)
@@ -62,7 +82,7 @@ namespace LostSoul
             position.Y -= label.RenderBehavior.Size.Y;
             label.BodyBehavior.Position = position;
             label.Color = gameOverTextColor;
-            gameOverHud.AddChild(label);
+            gameOverTextBackground.AddChild(label);
         }
 
         private void setupGameOverInstructions(LostSoulWorld world)
@@ -73,7 +93,32 @@ namespace LostSoul
             position.Y += label.RenderBehavior.Size.Y;
             label.BodyBehavior.Position = position;
             label.Color = gameOverTextColor;
-            gameOverHud.AddChild(label);
+            gameOverTextBackground.AddChild(label);
+        }
+
+        private void adjustGameOverTextBackgroundSize()
+        {
+            Vector2 topLeft = Vector2.Zero;
+            Vector2 bottomRight = Vector2.Zero;
+            foreach (HudElement element in gameOverTextBackground.Children)
+            {
+                var candidate = element.BodyBehavior.BoundingRectangle;
+                if (topLeft == Vector2.Zero)
+                {
+                    topLeft = new Vector2(candidate.Left, candidate.Top);
+                }
+                topLeft.X = Math.Min(candidate.Left, topLeft.X);
+                topLeft.Y = Math.Min(candidate.Top, topLeft.Y);
+                bottomRight.X = Math.Max(candidate.Right, bottomRight.X);
+                bottomRight.Y = Math.Max(candidate.Bottom, bottomRight.Y);
+            }
+            float margin = 10.0f;
+            var size = bottomRight - topLeft;
+            size.X += margin * 2.0f;
+            size.Y += margin * 2.0f;
+            gameOverTextBackground.BodyBehavior.Size = size;
+            var center = gameOverTextBackground.Parent.BodyBehavior.BoundingRectangle.Center;
+            gameOverTextBackground.BodyBehavior.Position = new Vector2(center.X - size.X / 2.0f, center.Y - size.Y / 2.0f);
         }
 
         public void Update(GameTime gameTime)

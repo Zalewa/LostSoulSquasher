@@ -57,6 +57,10 @@ namespace LostSoul
             {
                 return renderBehavior;
             }
+            set
+            {
+                renderBehavior = value;
+            }
         }
 
         public MovementBehavior MovementBehavior

@@ -9,7 +9,11 @@ namespace LostSoul
     class HudElement : Entity
     {
         private HudElement parent = null;
+        public HudElement Parent { get { return parent; } }
+
         private List<HudElement> children = new List<HudElement>();
+        public List<HudElement> Children { get { return children; } }
+
         public bool Visible { get; set; }
 
         public HudElement(LostSoulGame game)
