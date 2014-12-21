@@ -27,7 +27,7 @@ namespace LostSoul
 
         private void OnDeath(object sender, EventArgs e)
         {
-            Game.Score += 100;
+            Game.World.Score += 100;
             Expired = true;
         }
     }

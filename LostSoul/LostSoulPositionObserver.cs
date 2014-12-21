@@ -21,7 +21,7 @@ namespace LostSoul
             {
                 if (wasInPlayfield)
                 {
-                    entity.Game.IncrementLostEnemy();
+                    entity.Game.World.IncrementLostEnemy();
                     entity.Expired = true;
                 }
             }

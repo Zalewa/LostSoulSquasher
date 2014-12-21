@@ -54,7 +54,7 @@ namespace LostSoul
             soul.MovementBehavior.Velocity = PickVelocity(entity.Game, soul.Position);
             soul.ExpiredChanged += OnSoulExpired;
             souls.Add(soul);
-            entity.Game.AddActor(soul);
+            entity.Game.World.AddActor(soul);
         }
 
         private void OnSoulExpired(object sender, EventArgs e)

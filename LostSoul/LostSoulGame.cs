@@ -20,19 +20,11 @@ namespace LostSoul
 
         public SpriteBatch SpriteBatch;
         public ContentLoader ContentLoader = new ContentLoader();
-        public int Score;
         public AudioSystem Audio { get { return audio; } }
 
         private AudioSystem audio;
-        private Background background;
-        private Player player;
-        private LostSoulSpawner enemySpawner;
-        private List<Entity> actors = new List<Entity>();
-        private List<Entity> expiredActors = new List<Entity>();
-        private int lostEnemies = 0;
-        private List<CollisionBehavior> collisions = new List<CollisionBehavior>();
-
-        public List<Entity> Actors { get { return actors; } }
+        private LostSoulWorld world;
+        public LostSoulWorld World { get { return world; } }
 
         public LostSoulGame()
             : base()
@@ -56,16 +48,6 @@ namespace LostSoul
             IsMouseVisible = true;
         }
 
-        public void AddActor(Entity entity)
-        {
-            actors.Add(entity);
-        }
-
-        public void IncrementLostEnemy()
-        {
-            ++lostEnemies;
-        }
-
         protected override void Initialize()
         {
             base.Initialize();
@@ -80,11 +62,7 @@ namespace LostSoul
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             ContentLoader.LoadContent(Content);
 
-            background = new Background(this);
-            player = new Player(this);
-            player.Position = new Vector2(PlayField.Center.X, PlayField.Center.Y);
-
-            enemySpawner = new LostSoulSpawner(this);
+            world = new LostSoulWorld(this);
         }
 
         protected override void UnloadContent()
@@ -99,68 +77,20 @@ namespace LostSoul
                 Exit();
             }
 
-            background.Update(gameTime);
-            player.Update(gameTime);
-            enemySpawner.Update(gameTime);
-            foreach (Entity actor in actors)
-            {
-                actor.Update(gameTime);
-                if (actor.Expired)
-                {
-                    expiredActors.Add(actor);
-                }
-            }
-            FirePendingCollisions();
-            ClearCollisions();
-            RemoveExpiredActors();
+            world.Update(gameTime);
             Audio.FireSounds();
 
             base.Update(gameTime);
         }
 
-        private void RemoveExpiredActors()
-        {
-            foreach (Entity actor in expiredActors)
-            {
-                actors.Remove(actor);
-                if (actor.HasCollisionBehavior)
-                {
-                    collisions.Remove(actor.CollisionBehavior);
-                }
-            }
-            expiredActors.Clear();
-        }
-
-        private void ClearCollisions()
-        {
-            collisions.ForEach(e => e.ClearCollisions());
-        }
-
-        private void FirePendingCollisions()
-        {
-            collisions.ForEach(e => e.FirePendingCollisionEvents());
-        }
-
         protected override void Draw(GameTime gameTime)
         {
-            Matrix scaleMatrix = GetScaleMatrix();
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            SpriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scaleMatrix);
-            background.Draw(gameTime);
-            foreach (Entity actor in actors)
-            {
-                actor.Draw(gameTime);
-            }
-            player.Draw(gameTime);
-
-            SpriteBatch.DrawString(ContentLoader.Font, "Score: " + Score, Vector2.Zero, Color.Red);
-            SpriteBatch.DrawString(ContentLoader.Font, "Lost souls: " + lostEnemies, new Vector2(200.0f, 0.0f), Color.Red);
-            SpriteBatch.End();
+            world.Draw(gameTime);
             base.Draw(gameTime);
         }
 
-        private Matrix GetScaleMatrix()
+        public Matrix GetScaleMatrix()
         {
             return Matrix.CreateScale(GameScaleX(), GameScaleY(), 1.0f);
         }
@@ -183,11 +113,6 @@ namespace LostSoul
         internal Vector2 ProjectGameCoordsToScreenCoords(Vector2 point)
         {
             return new Vector2(point.X * GameScaleX(), point.Y * GameScaleY());
-        }
-
-        internal void RegisterCollision(CollisionBehavior collisionBehavior)
-        {
-            collisions.Add(collisionBehavior);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace LostSoul
         {
             var boomActor = new Explosion(entity.Game);
             boomActor.Position = entity.Position;
-            entity.Game.AddActor(boomActor);
+            entity.Game.World.AddActor(boomActor);
         }
 
         private bool CanFire(GameTime gameTime)

@@ -23,7 +23,7 @@ namespace LostSoul
         public CollisionBehavior(Entity entity)
         {
             Enabled = true;
-            entity.Game.RegisterCollision(this);
+            entity.Game.World.RegisterCollision(this);
         }
 
         public bool Collides(Entity e1, Entity e2)
@@ -33,7 +33,7 @@ namespace LostSoul
 
         public override void Run(GameTime gameTime, Entity entity)
         {
-            foreach (Entity other in entity.Game.Actors)
+            foreach (Entity other in entity.Game.World.Actors)
             {
                 if (ShouldCheckCollision(entity, other) && Collides(entity, other))
                 {
