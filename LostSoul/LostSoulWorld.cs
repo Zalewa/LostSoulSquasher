@@ -20,6 +20,7 @@ namespace LostSoul
         private int lostEnemies = 0;
         private List<CollisionBehavior> collisions = new List<CollisionBehavior>();
 
+        public int MaxLostSouls = 1;
         public int Score;
         public List<Entity> Actors { get { return actors; } }
 
@@ -37,8 +38,14 @@ namespace LostSoul
         public void Update(GameTime gameTime)
         {
             background.Update(gameTime);
-            player.Update(gameTime);
-            enemySpawner.Update(gameTime);
+            if (!player.Expired)
+            {
+                player.Update(gameTime);
+            }
+            if (!enemySpawner.Expired)
+            {
+                enemySpawner.Update(gameTime);
+            }
             foreach (Entity actor in actors)
             {
                 actor.Update(gameTime);
@@ -61,11 +68,50 @@ namespace LostSoul
             {
                 actor.Draw(gameTime);
             }
-            player.Draw(gameTime);
+            if (!player.Expired)
+            {
+                player.Draw(gameTime);
+            }
 
-            SpriteBatch.DrawString(Font, "Score: " + Score, Vector2.Zero, Color.Red);
-            SpriteBatch.DrawString(Font, "Lost souls: " + lostEnemies, new Vector2(200.0f, 0.0f), Color.Red);
+            DrawHud();
             SpriteBatch.End();
+        }
+
+        private void DrawHud()
+        {
+            if (!IsGameOver())
+            {
+                DrawGameHud();
+            }
+            else
+            {
+                DrawGameOverHud();
+            }
+        }
+
+        private void DrawGameOverHud()
+        {
+            var center = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y);
+            Vector2 textPosition;
+            Vector2 measure;
+
+            string msgGameOver = "Game Over";
+            measure = Font.MeasureString(msgGameOver);
+            textPosition = center - measure / 2.0f;
+            textPosition.Y -= measure.Y;
+            SpriteBatch.DrawString(Font, msgGameOver, textPosition, Color.Red);
+
+            string msgInstructions = "Press RMB to restart or Escape to exit.";
+            measure = Font.MeasureString(msgInstructions);
+            textPosition = center - measure / 2.0f;
+            textPosition.Y += measure.Y;
+            SpriteBatch.DrawString(Font, msgInstructions, textPosition, Color.Red);
+        }
+
+        private void DrawGameHud()
+        {
+            SpriteBatch.DrawString(Font, "Score: " + Score, Vector2.Zero, Color.Red);
+            SpriteBatch.DrawString(Font, "Lost souls: " + lostEnemies + " of " + MaxLostSouls, new Vector2(200.0f, 0.0f), Color.Red);
         }
 
         public void AddActor(Entity entity)
@@ -76,6 +122,17 @@ namespace LostSoul
         public void IncrementLostEnemy()
         {
             ++lostEnemies;
+            if (IsTooManyLost())
+            {
+                GoToGameOver();
+            }
+        }
+
+        private void GoToGameOver()
+        {
+            player.Expired = true;
+            enemySpawner.Expired = true;
+            actors.ForEach(e => e.Expired = true);
         }
 
         public void RegisterCollision(CollisionBehavior collisionBehavior)
@@ -104,6 +161,16 @@ namespace LostSoul
         private void FirePendingCollisions()
         {
             collisions.ForEach(e => e.FirePendingCollisionEvents());
+        }
+
+        private bool IsGameOver()
+        {
+            return IsTooManyLost();
+        }
+
+        private bool IsTooManyLost()
+        {
+            return lostEnemies >= MaxLostSouls;
         }
 
         private SpriteBatch SpriteBatch
