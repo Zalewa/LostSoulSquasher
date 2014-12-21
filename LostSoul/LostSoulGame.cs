@@ -154,8 +154,8 @@ namespace LostSoul
             }
             player.Draw(gameTime);
 
-            SpriteBatch.DrawString(ContentLoader.Font, "Score: " + Score, Vector2.Zero, Color.White);
-            SpriteBatch.DrawString(ContentLoader.Font, "Lost souls: " + lostEnemies, new Vector2(200.0f, 0.0f), Color.White);
+            SpriteBatch.DrawString(ContentLoader.Font, "Score: " + Score, Vector2.Zero, Color.Red);
+            SpriteBatch.DrawString(ContentLoader.Font, "Lost souls: " + lostEnemies, new Vector2(200.0f, 0.0f), Color.Red);
             SpriteBatch.End();
             base.Draw(gameTime);
         }
