@@ -26,6 +26,7 @@ namespace LostSoul
             base.Update(gameTime);
             if (!afterFirstUpdate)
             {
+                Game.Audio.PlaySound(Game.ContentLoader.ExplosionSound, Position);
                 afterFirstUpdate = true;
             }
             else

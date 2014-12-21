@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace LostSoul
 
         public SpriteFont Font;
 
+        public SoundEffect ExplosionSound;
+
         public void LoadContent(ContentManager content)
         {
             Background = content.Load<Texture2D>("background");
@@ -32,6 +35,8 @@ namespace LostSoul
             };
 
             Font = content.Load<SpriteFont>("Miramonte");
+
+            ExplosionSound = content.Load<SoundEffect>("DSBAREXP");
         }
     }
 }

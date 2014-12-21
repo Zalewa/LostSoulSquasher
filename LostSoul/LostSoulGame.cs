@@ -19,7 +19,9 @@ namespace LostSoul
         public SpriteBatch SpriteBatch;
         public ContentLoader ContentLoader = new ContentLoader();
         public int Score;
+        public AudioSystem Audio { get { return audio; } }
 
+        private AudioSystem audio;
         private Background background;
         private Player player;
         private LostSoulSpawner enemySpawner;
@@ -52,6 +54,10 @@ namespace LostSoul
         protected override void Initialize()
         {
             base.Initialize();
+            audio = new AudioSystem();
+            audio.ListenerPosition = new Vector2(PlayField.Center.X, PlayField.Center.Y);
+            audio.PanDivisor = PlayField.Width / 2;
+            audio.PanClamp = 0.9f;
         }
 
         protected override void LoadContent()
@@ -95,6 +101,7 @@ namespace LostSoul
             FirePendingCollisions();
             ClearCollisions();
             removeExpiredActors();
+            Audio.FireSounds();
 
             base.Update(gameTime);
         }
