@@ -17,19 +17,19 @@ namespace LostSoul
             this.Texture = texture;
         }
 
-        public static AnimationFrame mkCentered(Texture2D texture)
+        public static AnimationFrame MkCentered(Texture2D texture)
         {
             var result = new AnimationFrame(texture);
             result.Origin = new Vector2(texture.Width / 2, texture.Height / 2);
             return result;
         }
 
-        public static AnimationFrame[] mkCentered(Texture2D[] textures)
+        public static AnimationFrame[] MkCentered(Texture2D[] textures)
         {
             var result = new AnimationFrame[textures.Length];
             for (int i = 0; i < textures.Length; ++i)
             {
-                result[i] = mkCentered(textures[i]);
+                result[i] = MkCentered(textures[i]);
             }
             return result;
         }
@@ -42,6 +42,7 @@ namespace LostSoul
         private int frameIndex = 0;
 
         public float Interval { get; set; }
+
         public bool IsDone
         {
             get
@@ -49,6 +50,7 @@ namespace LostSoul
                 return frameIndex >= frames.Length && countdownToNextFrame <= 0.0f;
             }
         }
+
         public bool MarkEntityAsExpiredWhenDone { get; set; }
 
         public AnimationBehavior(AnimationFrame[] frames, float interval = 1.0f)
@@ -61,7 +63,7 @@ namespace LostSoul
         public override void Run(GameTime gameTime, Entity entity)
         {
             countdownToNextFrame -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            while (isSkipTime())
+            while (IsSkipTime())
             {
                 entity.RenderBehavior.Texture = frames[frameIndex].Texture;
                 entity.RenderBehavior.Origin = frames[frameIndex].Origin;
@@ -75,7 +77,7 @@ namespace LostSoul
             }
         }
 
-        private bool isSkipTime()
+        private bool IsSkipTime()
         {
             return !IsDone && countdownToNextFrame <= 0.0f && Interval > 0.0f;
         }

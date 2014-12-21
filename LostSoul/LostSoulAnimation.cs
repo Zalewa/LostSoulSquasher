@@ -22,25 +22,25 @@ namespace LostSoul
         {
             if (FloatingPoint.Compare(entity.MovementBehavior.Velocity.X, 0.0f))
             {
-                setTexture(entity, entity.MovementBehavior.Velocity.Y > 0.0f ? left : right);
+                SetTexture(entity, entity.MovementBehavior.Velocity.Y > 0.0f ? left : right);
             }
             else if (entity.MovementBehavior.Velocity.X < 0.0f)
             {
-                setTexture(entity, left);
+                SetTexture(entity, left);
             }
             else if (entity.MovementBehavior.Velocity.X > 0.0f)
             {
-                setTexture(entity, right);
+                SetTexture(entity, right);
             }
         }
 
-        private void setTexture(Entity entity, Texture2D texture)
+        private void SetTexture(Entity entity, Texture2D texture)
         {
             entity.RenderBehavior.Texture = texture;
-            entity.RenderBehavior.Origin = getTextureOrigin(texture);
+            entity.RenderBehavior.Origin = GetTextureOrigin(texture);
         }
 
-        private Vector2 getTextureOrigin(Texture2D texture)
+        private Vector2 GetTextureOrigin(Texture2D texture)
         {
             return new Vector2(texture.Width / 2, texture.Height / 2);
         }

@@ -15,7 +15,7 @@ namespace LostSoul
     {
         public readonly Rectangle PlayField = new Rectangle(0, 0, 640, 480);
 
-        public GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager graphics;
         public SpriteBatch SpriteBatch;
         public ContentLoader ContentLoader = new ContentLoader();
         public int Score;
@@ -100,13 +100,13 @@ namespace LostSoul
             }
             FirePendingCollisions();
             ClearCollisions();
-            removeExpiredActors();
+            RemoveExpiredActors();
             Audio.FireSounds();
 
             base.Update(gameTime);
         }
 
-        private void removeExpiredActors()
+        private void RemoveExpiredActors()
         {
             foreach (Entity actor in expiredActors)
             {

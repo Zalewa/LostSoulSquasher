@@ -8,7 +8,7 @@ namespace LostSoul
 {
     class PlayerActionBehavior : Behavior
     {
-        private const float REFIRE_TIME = 0.2f;
+        private const float RefireTime = 0.2f;
 
         private GameTime lastFireTime = null;
 
@@ -16,30 +16,30 @@ namespace LostSoul
         {
             if (entity.Firing)
             {
-                fireIfTimeIsAppropriate(gameTime, entity);
+                FireIfTimeIsAppropriate(gameTime, entity);
                 entity.Firing = false;
             }
         }
 
-        private void fireIfTimeIsAppropriate(GameTime gameTime, Entity entity)
+        private void FireIfTimeIsAppropriate(GameTime gameTime, Entity entity)
         {
-            if (canFire(gameTime))
+            if (CanFire(gameTime))
             {
-                fire(entity);
+                Fire(entity);
             }
         }
 
-        private void fire(Entity entity)
+        private void Fire(Entity entity)
         {
             var boomActor = new Explosion(entity.Game);
             boomActor.Position = entity.Position;
             entity.Game.AddActor(boomActor);
         }
 
-        private bool canFire(GameTime gameTime)
+        private bool CanFire(GameTime gameTime)
         {
             return lastFireTime == null ||
-                lastFireTime.TotalGameTime.TotalSeconds + REFIRE_TIME < gameTime.TotalGameTime.TotalSeconds;
+                lastFireTime.TotalGameTime.TotalSeconds + RefireTime < gameTime.TotalGameTime.TotalSeconds;
         }
     }
 }

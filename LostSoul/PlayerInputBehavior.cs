@@ -25,12 +25,12 @@ namespace LostSoul
 
             if (oldState != null)
             {
-                processMouseState(entity);
+                ProcessMouseState(entity);
             }
             oldState = Mouse.GetState();
         }
 
-        private void processMouseState(Entity entity)
+        private void ProcessMouseState(Entity entity)
         {
             MouseState state = Mouse.GetState();
             if (oldState.LeftButton == ButtonState.Released && state.LeftButton == ButtonState.Pressed)

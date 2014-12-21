@@ -32,11 +32,11 @@ namespace LostSoul
         {
             difficulty += (float)gameTime.ElapsedGameTime.TotalSeconds;
             countdownTillSpawn -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (shouldSpawn())
+            if (ShouldSpawn())
             {
                 for (int i = 0; i < NumSimultaneousSpawns; ++i)
                 {
-                    spawn(entity);
+                    Spawn(entity);
                     if (random.NextDouble() < ChanceOfSingularSpawn)
                     {
                         break;
@@ -46,12 +46,12 @@ namespace LostSoul
             }
         }
 
-        private void spawn(Entity entity)
+        private void Spawn(Entity entity)
         {
-            Edge edge = pickEdge();
+            Edge edge = PickEdge();
             var soul = new LostSoul(entity.Game);
-            soul.Position = pickLocation(entity.Game, edge);
-            soul.MovementBehavior.Velocity = pickVelocity(entity.Game, edge);
+            soul.Position = PickLocation(entity.Game, edge);
+            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, edge);
             soul.ExpiredChanged += OnSoulExpired;
             souls.Add(soul);
             entity.Game.AddActor(soul);
@@ -62,7 +62,7 @@ namespace LostSoul
             souls.Remove((Entity)sender);
         }
 
-        private Vector2 pickLocation(LostSoulGame game, Edge edge)
+        private Vector2 PickLocation(LostSoulGame game, Edge edge)
         {
             switch (edge)
             {
@@ -79,7 +79,7 @@ namespace LostSoul
             }
         }
 
-        private Vector2 pickVelocity(LostSoulGame game, Edge edge)
+        private Vector2 PickVelocity(LostSoulGame game, Edge edge)
         {
             float speed = 30.0f * DifficultySpeedFactor;
             if (random.NextDouble() < ChanceOfFasterSpeed)
@@ -101,13 +101,13 @@ namespace LostSoul
             }
         }
 
-        private Edge pickEdge()
+        private Edge PickEdge()
         {
             Array values = Enum.GetValues(typeof(Edge));
             return (Edge)values.GetValue(random.Next(values.Length));
         }
 
-        private bool shouldSpawn()
+        private bool ShouldSpawn()
         {
             return countdownTillSpawn <= 0.0f && souls.Count < maxSouls;
         }
