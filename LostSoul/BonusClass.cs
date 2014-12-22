@@ -59,7 +59,7 @@ namespace LostSoul
 
         public RenderBehavior MkRender(Entity entity)
         {
-            return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusOneUp);
+            return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusAtom);
         }
 
         public float Weight()

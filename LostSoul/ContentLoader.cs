@@ -26,6 +26,7 @@ namespace LostSoul
         public Song Ambient1;
 
         public Texture2D BonusOneUp;
+        public Texture2D BonusAtom;
 
         public void LoadContent(ContentManager content)
         {
@@ -54,6 +55,7 @@ namespace LostSoul
             Ambient1 = content.Load<Song>("Carefree");
 
             BonusOneUp = content.Load<Texture2D>("bonus_1up");
+            BonusAtom = content.Load<Texture2D>("bonus_atom");
         }
     }
 }
