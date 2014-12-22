@@ -17,6 +17,7 @@ namespace LostSoul
         private HudElementText scoreLabel;
         private HudElementText lostSoulsLabel;
         private HudElementText difficultyLabel;
+        private HudElementText helpLabel;
 
         private Color textColor = Color.Red;
         private Color gameOverTextColor = Color.White;
@@ -52,12 +53,18 @@ namespace LostSoul
             difficultyLabel.BodyBehavior.Position = new Vector2(300.0f, 0.0f);
             gameHud.AddChild(difficultyLabel);
 
+            helpLabel = new HudElementText(world.Game);
+            helpLabel.Text = "F - Fullscreen";
+            helpLabel.Color = textColor;
+            helpLabel.BodyBehavior.Position = new Vector2(300.0f + difficultyLabel.BodyBehavior.Size.X + 15.0f, 0.0f);
+            gameHud.AddChild(helpLabel);
+
             gameHud.RenderBehavior = new PrimitiveRectangleRenderBehavior(gameHud)
             {
                 Color = new Color(0.0f, 0.0f, 0.0f, 0.4f)
             };
             gameHud.BodyBehavior.Position = Vector2.Zero;
-            gameHud.BodyBehavior.Size = difficultyLabel.BodyBehavior.Position + difficultyLabel.BodyBehavior.Size + new Vector2(5.0f, 2.0f);
+            gameHud.BodyBehavior.Size = helpLabel.BodyBehavior.Position + helpLabel.BodyBehavior.Size + new Vector2(5.0f, 2.0f);
         }
 
         private void setupGameOverHud(LostSoulWorld world)
