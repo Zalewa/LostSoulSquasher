@@ -25,6 +25,7 @@ namespace LostSoul
             healthBehavior.DeathEvent += OnDeathHandler;
 
             collisionBehavior = new CollisionBehavior(this);
+            actionBehavior = new ExpirationActionBehavior(2.0f);
         }
 
         void OnDeathHandler(object sender, EventArgs e)

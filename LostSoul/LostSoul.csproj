@@ -61,6 +61,7 @@
     <Compile Include="Behavior.cs" />
     <Compile Include="BodyBehavior.cs" />
     <Compile Include="Bonus.cs" />
+    <Compile Include="BonusActionBehavior.cs" />
     <Compile Include="BonusClass.cs" />
     <Compile Include="BonusSpawner.cs" />
     <Compile Include="BonusSpawnerBehavior.cs" />
