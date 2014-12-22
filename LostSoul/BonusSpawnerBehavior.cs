@@ -30,10 +30,12 @@ namespace LostSoul
                 throw new InvalidOperationException("null bonus class returned");
             }
             var entity = new Bonus(world.Game, klass);
-            var playField = world.Game.PlayField;
+            var spawnField = world.Game.PlayField;
+            float margin = entity.BodyBehavior.Size.X;
+            spawnField.Inflate((int)-margin, (int)-margin);
             entity.BodyBehavior.Position = new Vector2(
-                (float)(playField.Left + (float)random.NextDouble() * playField.Width - entity.BodyBehavior.Size.X * 4.0f),
-                (float)(playField.Top + (float)random.NextDouble() * playField.Height - entity.BodyBehavior.Size.Y * 4.0f));
+                (float)spawnField.Left + (float)random.NextDouble() * spawnField.Width,
+                (float)spawnField.Top + (float)random.NextDouble() * spawnField.Height);
             world.AddActor(entity);
         }
 
