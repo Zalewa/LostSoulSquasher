@@ -21,6 +21,7 @@ namespace LostSoul
 
         public SpriteFont Font;
 
+        public SoundEffect AtomBoomSound;
         public SoundEffect ExplosionSound;
 
         public Song Ambient1;
@@ -52,6 +53,7 @@ namespace LostSoul
 
             Font = content.Load<SpriteFont>("Miramonte");
 
+            AtomBoomSound = content.Load<SoundEffect>("atomboom");
             ExplosionSound = content.Load<SoundEffect>("DSBAREXP");
             Ambient1 = content.Load<Song>("Carefree");
 

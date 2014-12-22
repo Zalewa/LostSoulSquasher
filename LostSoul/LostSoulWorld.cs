@@ -32,6 +32,7 @@ namespace LostSoul
 
         public int Score;
         public List<Entity> Actors { get { return actors; } }
+        private List<Entity> newActors = new List<Entity>();
 
         public LostSoulWorld(LostSoulGame game)
             : base(game)
@@ -55,6 +56,8 @@ namespace LostSoul
 
         public override void Update(GameTime gameTime)
         {
+            MoveNewActorsToActors();
+
             background.Update(gameTime);
             if (!IsGameOver())
             {
@@ -98,7 +101,13 @@ namespace LostSoul
 
         public void AddActor(Entity entity)
         {
-            actors.Add(entity);
+            newActors.Add(entity);
+        }
+
+        private void MoveNewActorsToActors()
+        {
+            newActors.ForEach(e => actors.Add(e));
+            newActors.Clear();
         }
 
         public void AddLives(int amount)

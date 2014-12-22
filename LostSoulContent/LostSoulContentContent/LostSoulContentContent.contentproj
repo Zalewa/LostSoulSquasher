@@ -169,6 +169,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="atomboom.wav">
+      <Name>atomboom</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="bonus_turtle.png">
       <Name>bonus_turtle</Name>
       <Importer>TextureImporter</Importer>

@@ -54,7 +54,7 @@ namespace LostSoul
     {
         public void Activate(LostSoulWorld world)
         {
-            throw new NotImplementedException();
+            world.AddActor(new AtomBomb(world.Game));
         }
 
         public RenderBehavior MkRender(Entity entity)
