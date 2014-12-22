@@ -8,9 +8,9 @@ namespace LostSoul
 {
     public class Bonus : Entity
     {
-        private IBonusClass bonusClass;
+        private BonusClass bonusClass;
 
-        public Bonus(LostSoulGame game, IBonusClass bonusClass)
+        public Bonus(LostSoulGame game, BonusClass bonusClass)
             :base(game)
         {
             this.bonusClass = bonusClass;
@@ -30,6 +30,7 @@ namespace LostSoul
 
         void OnDeathHandler(object sender, EventArgs e)
         {
+            Game.World.Score += bonusClass.Score();
             bonusClass.Activate(Game.World);
             Expired = true;
         }

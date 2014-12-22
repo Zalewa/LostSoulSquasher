@@ -7,102 +7,107 @@ using System.Text;
 
 namespace LostSoul
 {
-    public interface IBonusClass
+    public abstract class BonusClass
     {
-        void Activate(LostSoulWorld world);
-        RenderBehavior MkRender(Entity entity);
-        float Weight();
+        public int Score()
+        {
+            return 10;
+        }
+
+        public abstract void Activate(LostSoulWorld world);
+        public abstract RenderBehavior MkRender(Entity entity);
+        public abstract float Weight();
     }
 
-    public class BonusOneUp : IBonusClass
+    public class BonusOneUp : BonusClass
     {
-        public void Activate(LostSoulWorld world)
+        public override void Activate(LostSoulWorld world)
         {
             world.Game.Audio.PlaySound(world.Game.ContentLoader.OneUpSound);
             world.AddLives(1);
         }
 
-        public RenderBehavior MkRender(Entity entity)
+        public override RenderBehavior MkRender(Entity entity)
         {
             return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusOneUp);
         }
 
-        public float Weight()
+        public override float Weight()
         {
             return 1.0f;
         }
     }
 
-    public class BonusFiveUp : IBonusClass
+    public class BonusFiveUp : BonusClass
     {
-        public void Activate(LostSoulWorld world)
+        public override void Activate(LostSoulWorld world)
         {
             world.Game.Audio.PlaySound(world.Game.ContentLoader.OneUpSound);
             world.AddLives(5);
         }
 
-        public RenderBehavior MkRender(Entity entity)
+        public override RenderBehavior MkRender(Entity entity)
         {
             return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusFiveUp);
         }
 
-        public float Weight()
+        public override float Weight()
         {
             return 0.1f;
         }
     }
 
-    public class BonusEnemySlowDown : IBonusClass
+    public class BonusEnemySlowDown : BonusClass
     {
-        public void Activate(LostSoulWorld world)
+        public override void Activate(LostSoulWorld world)
         {
             world.AddSpeedModifierActor(new FactorModifierActor(world.Game, 0.2f, 3.0f));
             world.Game.Audio.PlaySound(world.Game.ContentLoader.TurtleSound);
         }
 
-        public RenderBehavior MkRender(Entity entity)
+        public override RenderBehavior MkRender(Entity entity)
         {
             return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusTurtle);
         }
 
-        public float Weight()
+        public override float Weight()
         {
             return 1.0f;
         }
     }
 
-    public class BonusAtomBomb : IBonusClass
+    public class BonusAtomBomb : BonusClass
     {
-        public void Activate(LostSoulWorld world)
+        public override void Activate(LostSoulWorld world)
         {
             world.AddActor(new AtomBomb(world.Game));
         }
 
-        public RenderBehavior MkRender(Entity entity)
+        public override RenderBehavior MkRender(Entity entity)
         {
             return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusAtom);
         }
 
-        public float Weight()
+        public override float Weight()
         {
             return 0.7f;
         }
     }
 
-    public class BonusDifficultyDecrease : IBonusClass
+    public class BonusDifficultyDecrease : BonusClass
     {
-        public void Activate(LostSoulWorld world)
+        public override void Activate(LostSoulWorld world)
         {
             world.ModifyDifficultyByFactor(-0.25f);
             world.Game.Audio.PlaySound(world.Game.ContentLoader.BabySound);
         }
 
-        public RenderBehavior MkRender(Entity entity)
+        public override RenderBehavior MkRender(Entity entity)
         {
             return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusBaby);
         }
 
-        public float Weight()
+        public override float Weight()
         {
             return 0.5f;
         }
@@ -112,7 +117,7 @@ namespace LostSoul
     {
         private struct BonusClassItem
         {
-            public IBonusClass Klass;
+            public BonusClass Klass;
             public float MinWeight;
             public float MaxWeight;
         }
@@ -120,7 +125,7 @@ namespace LostSoul
         private static Random random = null;
         private static BonusClassItem[] _bonuses = null;
 
-        public static IBonusClass PickRandomBonus()
+        public static BonusClass PickRandomBonus()
         {
             if (random == null)
             {
@@ -143,7 +148,7 @@ namespace LostSoul
             {
                 if (_bonuses == null)
                 {
-                    var klasses = new IBonusClass[] {
+                    var klasses = new BonusClass[] {
                         new BonusAtomBomb(),
                         new BonusOneUp(),
                         new BonusFiveUp(),
