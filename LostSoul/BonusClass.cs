@@ -37,7 +37,7 @@ namespace LostSoul
     {
         public void Activate(LostSoulWorld world)
         {
-            world.AddSpeedModifierActor(new FactorModifierActor(world.Game, 0.5f, 2.0f));
+            world.AddSpeedModifierActor(new FactorModifierActor(world.Game, 0.2f, 3.0f));
         }
 
         public RenderBehavior MkRender(Entity entity)
@@ -65,7 +65,7 @@ namespace LostSoul
 
         public float Weight()
         {
-            return 0.5f;
+            return 0.7f;
         }
     }
 
@@ -83,7 +83,7 @@ namespace LostSoul
 
         public float Weight()
         {
-            return 0.2f;
+            return 0.5f;
         }
     }
 

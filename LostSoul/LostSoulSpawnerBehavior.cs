@@ -36,7 +36,7 @@ namespace LostSoul
 
         public override void Run(GameTime gameTime, Entity entity)
         {
-            difficulty += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            difficulty += (float)gameTime.ElapsedGameTime.TotalSeconds * 0.5f;
             if (difficulty > MaxDifficulty)
             {
                 difficulty = MaxDifficulty;

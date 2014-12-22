@@ -8,8 +8,8 @@ namespace LostSoul
 {
     class BonusSpawnerBehavior : Behavior
     {
-        private const float bonusStartingCountUp = -10.0f;
-        private const float bonusProbabilityInterval = 60.0f;
+        private const float bonusStartingCountUp = -5.0f;
+        private const float bonusProbabilityInterval = 100.0f;
         private float timeSinceLastBonus = bonusStartingCountUp;
         private Random random = new Random();
 
