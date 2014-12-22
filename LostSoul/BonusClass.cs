@@ -38,6 +38,7 @@ namespace LostSoul
         public void Activate(LostSoulWorld world)
         {
             world.AddSpeedModifierActor(new FactorModifierActor(world.Game, 0.2f, 3.0f));
+            world.Game.Audio.PlaySound(world.Game.ContentLoader.TurtleSound);
         }
 
         public RenderBehavior MkRender(Entity entity)
@@ -74,6 +75,7 @@ namespace LostSoul
         public void Activate(LostSoulWorld world)
         {
             world.ModifyDifficultyByFactor(-0.25f);
+            world.Game.Audio.PlaySound(world.Game.ContentLoader.BabySound);
         }
 
         public RenderBehavior MkRender(Entity entity)

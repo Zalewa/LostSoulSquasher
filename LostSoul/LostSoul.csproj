@@ -99,6 +99,7 @@
     <Compile Include="RenderBehavior.cs" />
     <Compile Include="RenderDependentBodyBehavior.cs" />
     <Compile Include="FactorModifierBehavior.cs" />
+    <Compile Include="SoundDefinition.cs" />
     <Compile Include="SpriteRenderBehavior.cs" />
     <Compile Include="TextRenderBehavior.cs" />
   </ItemGroup>

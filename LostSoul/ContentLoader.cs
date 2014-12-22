@@ -21,9 +21,11 @@ namespace LostSoul
 
         public SpriteFont Font;
 
-        public SoundEffect AtomBoomSound;
-        public SoundEffect ExplosionSound;
-        public SoundEffect OneUpSound;
+        public SoundDefinition AtomBoomSound;
+        public SoundDefinition ExplosionSound;
+        public SoundDefinition OneUpSound;
+        public SoundDefinition BabySound;
+        public SoundDefinition TurtleSound;
 
         public Song Ambient1;
 
@@ -55,9 +57,14 @@ namespace LostSoul
 
             Font = content.Load<SpriteFont>("Miramonte");
 
-            AtomBoomSound = content.Load<SoundEffect>("atomboom");
-            ExplosionSound = content.Load<SoundEffect>("DSBAREXP");
-            OneUpSound = content.Load<SoundEffect>("1up");
+            AtomBoomSound = new SoundDefinition(content.Load<SoundEffect>("atomboom"));
+            ExplosionSound = new SoundDefinition(content.Load<SoundEffect>("DSBAREXP"));
+            OneUpSound = new SoundDefinition(content.Load<SoundEffect>("1up"));
+            BabySound = new SoundDefinition(content.Load<SoundEffect>("baby"))
+                {
+                    MaxPitchVariation = 0.15f
+                };
+            TurtleSound = new SoundDefinition(content.Load<SoundEffect>("turtle"));
 
             Ambient1 = content.Load<Song>("Carefree");
 

@@ -10,7 +10,7 @@ namespace LostSoul
 {
     class SoundRequest
     {
-        public SoundEffect Sound { get; set; }
+        public SoundDefinition Sound { get; set; }
         public Vector2? Position { get; set; }
     };
 
@@ -27,7 +27,7 @@ namespace LostSoul
         {
         }
 
-        public void PlaySound(SoundEffect sound)
+        public void PlaySound(SoundDefinition sound)
         {
             var request = new SoundRequest();
             request.Sound = sound;
@@ -35,7 +35,7 @@ namespace LostSoul
             soundRequests.Add(request);
         }
 
-        public void PlaySound(SoundEffect sound, Vector2 position)
+        public void PlaySound(SoundDefinition sound, Vector2 position)
         {
             var request = new SoundRequest();
             request.Sound = sound;
@@ -52,13 +52,14 @@ namespace LostSoul
 
         private void FireSound(SoundRequest request)
         {
-            SoundEffectInstance instance = request.Sound.CreateInstance();
+            SoundEffectInstance instance = request.Sound.SoundEffect.CreateInstance();
             if (request.Position != null)
             {
                 Vector2 relative = (Vector2)request.Position - ListenerPosition;
                 instance.Pan = MathHelper.Clamp(relative.X / PanDivisor, -PanClamp, PanClamp);
             }
-            instance.Pitch = 0.5f - (float)random.NextDouble();
+            instance.Pitch = (request.Sound.MaxPitchVariation / 2.0f) -
+                (float)random.NextDouble() * request.Sound.MaxPitchVariation;
             instance.Play();
             playingSounds.Add(instance);
         }
