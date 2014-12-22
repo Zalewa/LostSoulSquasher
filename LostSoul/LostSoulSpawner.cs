@@ -12,5 +12,21 @@ namespace LostSoul
         {
             actionBehavior = new LostSoulSpawnerBehavior();
         }
+
+        public float Difficulty
+        {
+            get
+            {
+                return ((LostSoulSpawnerBehavior)actionBehavior).Difficulty;
+            }
+        }
+
+        public float MaxDifficulty
+        {
+            get
+            {
+                return LostSoulSpawnerBehavior.MaxDifficulty;
+            }
+        }
     }
 }

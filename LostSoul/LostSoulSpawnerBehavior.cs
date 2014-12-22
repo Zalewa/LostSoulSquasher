@@ -13,14 +13,20 @@ namespace LostSoul
             Left, Right, Top, Bottom
         }
 
-        private const float MaxDifficulty = 50.0f;
+        public const float MaxDifficulty = 50.0f;
         private const float MinDifficulty = 1.0f;
         private const double ChanceOfFasterSpeed = 0.1;
         private const float MinSpawnCountdown = 0.2f;
 
         private Random random = new Random();
         private float countdownTillSpawn = 1.0f;
+
         private float difficulty = MinDifficulty;
+        public float Difficulty
+        {
+            get { return difficulty; }
+        }
+
         private int maxSouls = 30;
         private List<Entity> souls = new List<Entity>();
 

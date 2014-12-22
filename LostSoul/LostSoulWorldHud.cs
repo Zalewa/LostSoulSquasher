@@ -16,6 +16,7 @@ namespace LostSoul
         private HudElement gameOverTextBackground;
         private HudElementText scoreLabel;
         private HudElementText lostSoulsLabel;
+        private HudElementText difficultyLabel;
 
         private Color textColor = Color.Red;
         private Color gameOverTextColor = Color.White;
@@ -44,6 +45,19 @@ namespace LostSoul
             lostSoulsLabel.Color = textColor;
             lostSoulsLabel.BodyBehavior.Position = new Vector2(200.0f, 0.0f);
             gameHud.AddChild(lostSoulsLabel);
+
+            difficultyLabel = new HudElementText(world.Game);
+            difficultyLabel.Text = "Difficulty: 100%";
+            difficultyLabel.Color = textColor;
+            difficultyLabel.BodyBehavior.Position = new Vector2(300.0f, 0.0f);
+            gameHud.AddChild(difficultyLabel);
+
+            gameHud.RenderBehavior = new PrimitiveRectangleRenderBehavior(gameHud)
+            {
+                Color = new Color(0.0f, 0.0f, 0.0f, 0.4f)
+            };
+            gameHud.BodyBehavior.Position = Vector2.Zero;
+            gameHud.BodyBehavior.Size = difficultyLabel.BodyBehavior.Position + difficultyLabel.BodyBehavior.Size + new Vector2(5.0f, 2.0f);
         }
 
         private void setupGameOverHud(LostSoulWorld world)
@@ -128,6 +142,8 @@ namespace LostSoul
         {
             scoreLabel.Text = "Score: " + world.Score;
             lostSoulsLabel.Text = "Lives: " + world.Lives;
+            difficultyLabel.Text = String.Format("Difficulty: {0:#}%",
+                (world.Difficulty / world.MaxDifficulty) * 100.0f);
 
             root.Update(gameTime);
         }

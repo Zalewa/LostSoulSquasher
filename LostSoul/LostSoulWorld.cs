@@ -179,5 +179,21 @@ namespace LostSoul
                 GameOverChanged(this, EventArgs.Empty);
             }
         }
+
+        public float Difficulty
+        {
+            get
+            {
+                return enemySpawner.Difficulty;
+            }
+        }
+
+        public float MaxDifficulty
+        {
+            get
+            {
+                return enemySpawner.MaxDifficulty;
+            }
+        }
     }
 }
