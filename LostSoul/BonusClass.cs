@@ -18,6 +18,7 @@ namespace LostSoul
     {
         public void Activate(LostSoulWorld world)
         {
+            world.Game.Audio.PlaySound(world.Game.ContentLoader.OneUpSound);
             world.AddLives(1);
         }
 

@@ -23,6 +23,7 @@ namespace LostSoul
 
         public SoundEffect AtomBoomSound;
         public SoundEffect ExplosionSound;
+        public SoundEffect OneUpSound;
 
         public Song Ambient1;
 
@@ -55,6 +56,8 @@ namespace LostSoul
 
             AtomBoomSound = content.Load<SoundEffect>("atomboom");
             ExplosionSound = content.Load<SoundEffect>("DSBAREXP");
+            OneUpSound = content.Load<SoundEffect>("1up");
+
             Ambient1 = content.Load<Song>("Carefree");
 
             BonusOneUp = content.Load<Texture2D>("bonus_1up");
