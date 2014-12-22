@@ -25,6 +25,10 @@ namespace LostSoul
         public float Difficulty
         {
             get { return difficulty; }
+            set
+            {
+                difficulty = Math.Min(Math.Max(value, MinDifficulty), MaxDifficulty);
+            }
         }
 
         private int maxSouls = 30;

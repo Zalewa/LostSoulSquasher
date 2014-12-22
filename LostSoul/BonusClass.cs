@@ -73,12 +73,12 @@ namespace LostSoul
     {
         public void Activate(LostSoulWorld world)
         {
-            throw new NotImplementedException();
+            world.ModifyDifficultyByFactor(-0.25f);
         }
 
         public RenderBehavior MkRender(Entity entity)
         {
-            return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusOneUp);
+            return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusBaby);
         }
 
         public float Weight()

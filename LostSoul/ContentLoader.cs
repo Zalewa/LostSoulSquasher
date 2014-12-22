@@ -29,6 +29,7 @@ namespace LostSoul
 
         public Texture2D BonusOneUp;
         public Texture2D BonusAtom;
+        public Texture2D BonusBaby;
         public Texture2D BonusTurtle;
 
         public void LoadContent(ContentManager content)
@@ -62,6 +63,7 @@ namespace LostSoul
 
             BonusOneUp = content.Load<Texture2D>("bonus_1up");
             BonusAtom = content.Load<Texture2D>("bonus_atom");
+            BonusBaby = content.Load<Texture2D>("bonus_baby");
             BonusTurtle = content.Load<Texture2D>("bonus_turtle");
         }
     }

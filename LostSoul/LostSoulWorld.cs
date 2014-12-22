@@ -23,6 +23,7 @@ namespace LostSoul
 
         private Player player;
         private LostSoulSpawner enemySpawner;
+
         private List<Entity> actors = new List<Entity>();
         private List<Entity> expiredActors = new List<Entity>();
 
@@ -226,6 +227,11 @@ namespace LostSoul
             {
                 SpeedModifierActorAdded(this, new FactorModifierActorAddedEventArgs(actor));
             }
+        }
+
+        internal void ModifyDifficultyByFactor(float factor)
+        {
+            enemySpawner.ModifyDifficultyByFactor(factor);
         }
     }
 }
