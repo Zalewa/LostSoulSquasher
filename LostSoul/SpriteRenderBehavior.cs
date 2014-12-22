@@ -7,15 +7,17 @@ using System.Text;
 
 namespace LostSoul
 {
-    class SpriteRenderBehavior : RenderBehavior
+    public class SpriteRenderBehavior : RenderBehavior
     {
         private LostSoulGame game;
+        public Color Color { get; set; }
         public Texture2D Texture { get; set; }
         public Vector2 Scale { get; set; }
 
         public SpriteRenderBehavior(LostSoulGame game, Texture2D texture)
         {
             this.game = game;
+            Color = Color.White;
             Texture = texture;
             Scale = Vector2.One;
         }
@@ -28,7 +30,7 @@ namespace LostSoul
                 (int)(Texture.Width * Scale.X),
                 (int)(Texture.Height * Scale.Y));
             game.SpriteBatch.Draw(Texture, destinationRectangle, null,
-                Color.White, 0.0f, Origin, SpriteEffects.None, 0.0f);
+                Color, 0.0f, Origin, SpriteEffects.None, 0.0f);
         }
 
         public override Vector2 Size

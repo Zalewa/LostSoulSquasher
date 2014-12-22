@@ -68,6 +68,7 @@
     <Compile Include="GameObjectBodyBehavior.cs" />
     <Compile Include="HudElement.cs" />
     <Compile Include="HudElementText.cs" />
+    <Compile Include="LostSoulClass.cs" />
     <Compile Include="LostSoulWorld.cs" />
     <Compile Include="CollisionBehavior.cs" />
     <Compile Include="ContentLoader.cs" />

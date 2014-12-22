@@ -20,7 +20,7 @@ namespace LostSoul
             animationBehavior.MarkEntityAsExpiredWhenDone = true;
             this.animationBehavior = animationBehavior;
             collisionBehavior = new CollisionBehavior(this);
-            CollisionBehavior.CollisionDetected += CollisionDetected;
+            CollisionBehavior.CollisionDetected += CollisionDetectedHandler;
         }
 
         public override void Update(GameTime gameTime)
@@ -29,21 +29,18 @@ namespace LostSoul
             if (!afterFirstUpdate)
             {
                 Game.Audio.PlaySound(Game.ContentLoader.ExplosionSound, BodyBehavior.Position);
-                afterFirstUpdate = true;
-            }
-            else
-            {
                 CollisionBehavior.Enabled = false;
+                afterFirstUpdate = true;
             }
         }
 
-        private void CollisionDetected(object sender, EventArgs e)
+        private void CollisionDetectedHandler(object sender, EventArgs e)
         {
             foreach (Entity colliding in CollisionBehavior.Colliding)
             {
                 if (colliding.HealthBehavior != null)
                 {
-                    colliding.HealthBehavior.Damage();
+                    colliding.HealthBehavior.Damage(1);
                 }
             }
         }

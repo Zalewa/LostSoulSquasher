@@ -13,45 +13,38 @@ namespace LostSoul
             Left, Right, Top, Bottom
         }
 
-        private const int MinSpawns = 1;
-        private const int MaxSpawns = 5;
-        private const double ChanceOfSingularSpawn = 0.7;
+        private const float MaxDifficulty = 50.0f;
+        private const float MinDifficulty = 1.0f;
         private const double ChanceOfFasterSpeed = 0.1;
-        private const float DifficultySpeedMultiplier = 0.1f;
-        private const float SpawnCountdownDifficultyDivisor = 1000.0f;
         private const float MinSpawnCountdown = 0.2f;
-        private const float SpawnCountIncreaseInterval = 20.0f;
 
         private Random random = new Random();
         private float countdownTillSpawn = 1.0f;
-        private float difficulty = 1.0f;
+        private float difficulty = MinDifficulty;
         private int maxSouls = 30;
         private List<Entity> souls = new List<Entity>();
 
         public override void Run(GameTime gameTime, Entity entity)
         {
             difficulty += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (difficulty > MaxDifficulty)
+            {
+                difficulty = MaxDifficulty;
+            }
             countdownTillSpawn -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (ShouldSpawn())
             {
-                for (int i = 0; i < NumSimultaneousSpawns; ++i)
-                {
-                    Spawn(entity);
-                    if (random.NextDouble() < ChanceOfSingularSpawn)
-                    {
-                        break;
-                    }
-                }
-                countdownTillSpawn = Math.Max(1.0f - (difficulty / SpawnCountdownDifficultyDivisor), MinSpawnCountdown);
+                Spawn(entity);
+                countdownTillSpawn = Math.Max(1.0f - difficulty/ MaxDifficulty, MinSpawnCountdown);
             }
         }
 
         private void Spawn(Entity entity)
         {
             Edge edge = PickEdge();
-            var soul = new LostSoul(entity.Game);
+            var soul = PickSoul(entity.Game);
             soul.BodyBehavior.Position = PickLocation(entity.Game, edge);
-            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, soul.BodyBehavior.Position);
+            soul.MovementBehavior.Velocity = PickVelocity(entity.Game, soul);
             soul.ExpiredChanged += OnSoulExpired;
             souls.Add(soul);
             entity.Game.World.AddActor(soul);
@@ -60,6 +53,39 @@ namespace LostSoul
         private void OnSoulExpired(object sender, EventArgs e)
         {
             souls.Remove((Entity)sender);
+        }
+
+        private LostSoul PickSoul(LostSoulGame game)
+        {
+            var klass = PickSoulClass();
+            return new LostSoul(game, klass);
+        }
+
+        private LostSoulClass PickSoulClass()
+        {
+            float bigSkull = (float)random.NextDouble();
+            if (bigSkull < 0.05f)
+            {
+                return LostSoulClasses.Big;
+            }
+            float roll = (float)random.NextDouble() * difficulty;
+
+            if (roll > MaxDifficulty * 0.85f)
+            {
+                return LostSoulClasses.UltraFast;
+            }
+            else if (roll > MaxDifficulty * 0.65f)
+            {
+                return LostSoulClasses.Fast;
+            }
+            else if (roll > MaxDifficulty * 0.30f)
+            {
+                return LostSoulClasses.Average;
+            }
+            else
+            {
+                return LostSoulClasses.Slow;
+            }
         }
 
         private Vector2 PickLocation(LostSoulGame game, Edge edge)
@@ -79,20 +105,24 @@ namespace LostSoul
             }
         }
 
-        private Vector2 PickVelocity(LostSoulGame game, Vector2 position)
+        private Vector2 PickVelocity(LostSoulGame game, LostSoul soul)
         {
-            float speed = 30.0f * DifficultySpeedFactor;
+            float speed = soul.Klass.Speed;
             if (random.NextDouble() < ChanceOfFasterSpeed)
             {
                 speed *= 2.0f;
             }
-            float angle = MathHelper.ToRadians(22.5f - (45.0f * (float)random.NextDouble()));
+
+            var position = soul.BodyBehavior.Position;
             Vector2 diff = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y) - position;
             diff = Vector2.Normalize(diff);
+
+            float angle = MathHelper.ToRadians(22.5f - (45.0f * (float)random.NextDouble()));
             Vector2 rotated = new Vector2() {
                 X = (float)(diff.X * Math.Cos(angle) - diff.Y * Math.Sin(angle)),
                 Y = (float)(diff.Y * Math.Cos(angle) + diff.X * Math.Sin(angle))
             };
+
             return rotated * speed;
         }
 
@@ -105,24 +135,6 @@ namespace LostSoul
         private bool ShouldSpawn()
         {
             return countdownTillSpawn <= 0.0f && souls.Count < maxSouls;
-        }
-
-        private float DifficultySpeedFactor
-        {
-            get
-            {
-                return Math.Max(1.0f, difficulty * DifficultySpeedMultiplier);
-            }
-        }
-
-        private int NumSimultaneousSpawns
-        {
-            get
-            {
-                return Math.Min(Math.Max(
-                    (int)(difficulty / SpawnCountIncreaseInterval),
-                    MinSpawns), MaxSpawns);
-            }
         }
     }
 }
