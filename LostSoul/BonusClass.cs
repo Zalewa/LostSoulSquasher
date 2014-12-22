@@ -33,6 +33,25 @@ namespace LostSoul
         }
     }
 
+    public class BonusFiveUp : IBonusClass
+    {
+        public void Activate(LostSoulWorld world)
+        {
+            world.Game.Audio.PlaySound(world.Game.ContentLoader.OneUpSound);
+            world.AddLives(5);
+        }
+
+        public RenderBehavior MkRender(Entity entity)
+        {
+            return BonusRandomFactory.MkBonusRender(entity, entity.Game.ContentLoader.BonusFiveUp);
+        }
+
+        public float Weight()
+        {
+            return 0.1f;
+        }
+    }
+
     public class BonusEnemySlowDown : IBonusClass
     {
         public void Activate(LostSoulWorld world)
@@ -127,6 +146,7 @@ namespace LostSoul
                     var klasses = new IBonusClass[] {
                         new BonusAtomBomb(),
                         new BonusOneUp(),
+                        new BonusFiveUp(),
                         new BonusDifficultyDecrease(),
                         new BonusEnemySlowDown()
                     };
