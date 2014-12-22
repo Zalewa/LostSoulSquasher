@@ -12,6 +12,7 @@ namespace LostSoul
         public const int StartingLives = 10;
 
         public event EventHandler GameOverChanged;
+        public event EventHandler SpeedModifierActorAdded;
 
         private LostSoulWorldHud hud;
 
@@ -33,6 +34,9 @@ namespace LostSoul
         public int Score;
         public List<Entity> Actors { get { return actors; } }
         private List<Entity> newActors = new List<Entity>();
+
+        private List<FactorModifierActor> enemySpeedModifierActors = new List<FactorModifierActor>();
+        public List<FactorModifierActor> EnemySpeedModifierActors { get { return enemySpeedModifierActors; } }
 
         public LostSoulWorld(LostSoulGame game)
             : base(game)
@@ -104,6 +108,13 @@ namespace LostSoul
             newActors.Add(entity);
         }
 
+        public void AddSpeedModifierActor(FactorModifierActor actor)
+        {
+            newActors.Add(actor);
+            enemySpeedModifierActors.Add(actor);
+            OnSpeedModifierActorAdded(actor);
+        }
+
         private void MoveNewActorsToActors()
         {
             newActors.ForEach(e => actors.Add(e));
@@ -140,6 +151,10 @@ namespace LostSoul
                 if (actor.CollisionBehavior != null)
                 {
                     collisions.Remove(actor.CollisionBehavior);
+                }
+                if (actor is FactorModifierActor)
+                {
+                    enemySpeedModifierActors.Remove((FactorModifierActor)actor);
                 }
             }
             expiredActors.Clear();
@@ -202,6 +217,14 @@ namespace LostSoul
             get
             {
                 return enemySpawner.MaxDifficulty;
+            }
+        }
+
+        public void OnSpeedModifierActorAdded(FactorModifierActor actor)
+        {
+            if (SpeedModifierActorAdded != null)
+            {
+                SpeedModifierActorAdded(this, new FactorModifierActorAddedEventArgs(actor));
             }
         }
     }

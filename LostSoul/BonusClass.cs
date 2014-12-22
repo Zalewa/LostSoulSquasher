@@ -37,7 +37,7 @@ namespace LostSoul
     {
         public void Activate(LostSoulWorld world)
         {
-            throw new NotImplementedException();
+            world.AddSpeedModifierActor(new FactorModifierActor(world.Game, 0.5f, 2.0f));
         }
 
         public RenderBehavior MkRender(Entity entity)

@@ -33,6 +33,20 @@ namespace LostSoul
             HealthBehavior.DamagedEvent += OnDamaged;
 
             positionObserver = new LostSoulPositionObserver(this);
+            foreach (FactorModifierActor actor in game.World.EnemySpeedModifierActors)
+            {
+                if (!actor.Expired)
+                {
+                    movementBehavior.AddSpeedModifier(actor);
+                }
+            }
+            game.World.SpeedModifierActorAdded += World_SpeedModifierActorAdded;
+        }
+
+        void World_SpeedModifierActorAdded(object sender, EventArgs e)
+        {
+            FactorModifierActorAddedEventArgs args = (FactorModifierActorAddedEventArgs)e;
+            movementBehavior.AddSpeedModifier(args.Actor);
         }
 
         private void OnDamaged(object sender, EventArgs e)

@@ -67,7 +67,9 @@
     <Compile Include="BonusClass.cs" />
     <Compile Include="BonusSpawner.cs" />
     <Compile Include="BonusSpawnerBehavior.cs" />
+    <Compile Include="FactorModifierActorAddedEventArgs.cs" />
     <Compile Include="GameObjectBodyBehavior.cs" />
+    <Compile Include="FactorModifierActor.cs" />
     <Compile Include="HudElement.cs" />
     <Compile Include="HudElementText.cs" />
     <Compile Include="LostSoulClass.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderBehavior.cs" />
     <Compile Include="RenderDependentBodyBehavior.cs" />
+    <Compile Include="FactorModifierBehavior.cs" />
     <Compile Include="SpriteRenderBehavior.cs" />
     <Compile Include="TextRenderBehavior.cs" />
   </ItemGroup>
