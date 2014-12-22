@@ -27,6 +27,7 @@ namespace LostSoul
         public SoundDefinition BabySound;
         public SoundDefinition TurtleSound;
         public SoundDefinition SkullShowSound;
+        public SoundDefinition SkullEscapeSound;
 
         public Song Ambient1;
 
@@ -68,6 +69,7 @@ namespace LostSoul
                 };
             TurtleSound = new SoundDefinition(content.Load<SoundEffect>("turtle"));
             SkullShowSound = new SoundDefinition(content.Load<SoundEffect>("DSDMACT"));
+            SkullEscapeSound = new SoundDefinition(content.Load<SoundEffect>("DSSKLATK"));
 
             Ambient1 = content.Load<Song>("Carefree");
 

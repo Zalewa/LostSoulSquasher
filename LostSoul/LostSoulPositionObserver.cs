@@ -22,6 +22,7 @@ namespace LostSoul
             {
                 if (wasInPlayfield)
                 {
+                    entity.Game.Audio.PlaySound(entity.Game.ContentLoader.SkullEscapeSound);
                     entity.Game.World.AddLives(-1);
                     entity.Expired = true;
                 }
