@@ -30,6 +30,7 @@ namespace LostSoul
         public SoundDefinition SkullEscapeSound;
 
         public Song Ambient1;
+        public Song GameOverMusic;
 
         public Texture2D BonusOneUp;
         public Texture2D BonusFiveUp;
@@ -72,6 +73,7 @@ namespace LostSoul
             SkullEscapeSound = new SoundDefinition(content.Load<SoundEffect>("DSSKLATK"));
 
             Ambient1 = content.Load<Song>("Carefree");
+            GameOverMusic = content.Load<Song>("ecfike__the-end-of-the-world");
 
             BonusOneUp = content.Load<Texture2D>("bonus_1up");
             BonusFiveUp = content.Load<Texture2D>("bonus_5up");

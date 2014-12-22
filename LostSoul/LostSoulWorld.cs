@@ -133,6 +133,7 @@ namespace LostSoul
 
         private void GoToGameOver()
         {
+            Game.Audio.PlayMusic(Game.ContentLoader.GameOverMusic);
             player.Expired = true;
             enemySpawner.Expired = true;
             actors.ForEach(e => e.Expired = true);
