@@ -16,6 +16,7 @@ namespace LostSoul
         public int Health { get; set; }
         public int KillScore { get; set; }
         public int DamageScore { get; set; }
+        public SoundDefinition ActivationSound { get; set; }
 
         public LostSoulClass()
         {
@@ -104,6 +105,7 @@ namespace LostSoul
             Color = Color.White;
             DifficultyFactor = 3.0f;
             Scale = new Vector2(3.0f, 3.0f);
+            ActivationSound = game.ContentLoader.SkullShowSound;
         }
     }
 }

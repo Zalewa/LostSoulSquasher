@@ -26,6 +26,7 @@ namespace LostSoul
         public SoundDefinition OneUpSound;
         public SoundDefinition BabySound;
         public SoundDefinition TurtleSound;
+        public SoundDefinition SkullShowSound;
 
         public Song Ambient1;
 
@@ -66,6 +67,7 @@ namespace LostSoul
                     MaxPitchVariation = 0.15f
                 };
             TurtleSound = new SoundDefinition(content.Load<SoundEffect>("turtle"));
+            SkullShowSound = new SoundDefinition(content.Load<SoundEffect>("DSDMACT"));
 
             Ambient1 = content.Load<Song>("Carefree");
 

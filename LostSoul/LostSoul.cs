@@ -8,8 +8,10 @@ namespace LostSoul
 {
     public class LostSoul : Entity
     {
-        public LostSoulClass Klass;
         private LostSoulPositionObserver positionObserver;
+        private bool started = false;
+
+        public LostSoulClass Klass;
 
         public LostSoul(LostSoulGame game, LostSoulClass klass)
             : base(game)
@@ -41,6 +43,19 @@ namespace LostSoul
                 }
             }
             game.World.SpeedModifierActorAdded += World_SpeedModifierActorAdded;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (!started)
+            {
+                if (Klass.ActivationSound != null)
+                {
+                    Game.Audio.PlaySound(Klass.ActivationSound);
+                }
+                started = true;
+            }
+            base.Update(gameTime);
         }
 
         void World_SpeedModifierActorAdded(object sender, EventArgs e)
