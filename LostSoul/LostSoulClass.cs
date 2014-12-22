@@ -29,11 +29,25 @@ namespace LostSoul
 
     public class LostSoulClasses
     {
-        public static readonly LostSoulSlow Slow = new LostSoulSlow();
-        public static readonly LostSoulAverage Average = new LostSoulAverage();
-        public static readonly LostSoulFast Fast = new LostSoulFast();
-        public static readonly LostSoulUltraFast UltraFast = new LostSoulUltraFast();
-        public static readonly LostSoulBig Big = new LostSoulBig();
+        private static LostSoulSlow slow;
+        public static LostSoulSlow Slow { get { return slow; } }
+        private static LostSoulAverage average;
+        public static LostSoulAverage Average { get { return average; } }
+        private static LostSoulFast fast;
+        public static LostSoulFast Fast { get { return fast; } }
+        private static LostSoulUltraFast ultraFast;
+        public static LostSoulUltraFast UltraFast { get { return ultraFast; } }
+        private static LostSoulBig big;
+        public static LostSoulBig Big { get { return big; } }
+
+        public static void LoadContent(LostSoulGame game)
+        {
+            slow = new LostSoulSlow();
+            average = new LostSoulAverage();
+            fast = new LostSoulFast();
+            ultraFast = new LostSoulUltraFast();
+            big = new LostSoulBig(game);
+        }
     }
 
     public class LostSoulSlow : LostSoulClass
@@ -81,7 +95,7 @@ namespace LostSoul
 
     public class LostSoulBig : LostSoulClass
     {
-        public LostSoulBig()
+        public LostSoulBig(LostSoulGame game)
         {
             KillScore = 300;
             DamageScore = 50;

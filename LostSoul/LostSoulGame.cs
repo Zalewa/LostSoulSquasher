@@ -114,6 +114,7 @@ namespace LostSoul
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             ContentLoader.LoadContent(Content);
+            LostSoulClasses.LoadContent(this);
 
             ResetGame();
         }
