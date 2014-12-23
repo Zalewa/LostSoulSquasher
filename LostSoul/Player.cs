@@ -7,11 +7,15 @@ using System.Text;
 
 namespace LostSoul
 {
-    class Player : Entity
+    public class Player : Entity
     {
+        public int Score { get; set; }
+
         public Player(LostSoulGame game)
             : base(game)
         {
+            Score = 0;
+
             Texture2D texture = game.ContentLoader.Crosshair;
             bodyBehavior = new GameObjectBodyBehavior(this);
             renderBehavior = new SpriteRenderBehavior(game, texture);
@@ -19,6 +23,7 @@ namespace LostSoul
 
             inputBehavior = new PlayerInputBehavior(game);
             actionBehavior = new PlayerActionBehavior();
+            healthBehavior = new HealthBehavior(this);
         }
     }
 }

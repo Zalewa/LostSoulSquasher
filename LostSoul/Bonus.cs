@@ -30,7 +30,7 @@ namespace LostSoul
 
         void OnDeathHandler(object sender, EventArgs e)
         {
-            Game.World.Score += bonusClass.Score();
+            Game.World.Player.Score += bonusClass.Score();
             bonusClass.Activate(Game.World);
             Expired = true;
         }

@@ -40,7 +40,7 @@ namespace LostSoul
             {
                 if (colliding.HealthBehavior != null)
                 {
-                    colliding.HealthBehavior.Damage(1);
+                    colliding.HealthBehavior.Health -= 1;
                 }
             }
         }

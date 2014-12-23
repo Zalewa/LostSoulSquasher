@@ -8,9 +8,30 @@ namespace LostSoul
     public class HealthBehavior : Behavior
     {
         private bool dead = false;
+        public bool IsDead { get { return dead; } }
+
         private Entity entity;
         public Entity Entity { get { return entity; } }
-        public int Health = 0;
+
+        private int health = 0;
+        public int Health
+        {
+            get { return health; }
+            set
+            {
+                var oldHealth = health;
+                health = value;
+                if (!dead && health <= 0)
+                {
+                    dead = true;
+                    OnDeathEvent();
+                }
+                else if (!dead && health > 0 && health < oldHealth)
+                {
+                    OnDamagedEvent();
+                }
+            }
+        }
 
         public event EventHandler DamagedEvent;
         public event EventHandler DeathEvent;
@@ -20,18 +41,13 @@ namespace LostSoul
             this.entity = entity;
         }
 
-        public void Damage(int amount)
+        /// <summary>
+        /// Doesn't summon any events. Doesn't revive from dead state.
+        /// </summary>
+        /// <param name="health"></param>
+        public void SetHealthOmittingEventsAndChecks(int health)
         {
-            Health -= amount;
-            if (!dead && Health <= 0)
-            {
-                dead = true;
-                OnDeathEvent();
-            }
-            else if (!dead && Health > 0)
-            {
-                OnDamagedEvent();
-            }
+            this.health = health;
         }
 
         public override void Run(Microsoft.Xna.Framework.GameTime gameTime, Entity entity)

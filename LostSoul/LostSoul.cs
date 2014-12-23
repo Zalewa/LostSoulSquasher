@@ -66,12 +66,12 @@ namespace LostSoul
 
         private void OnDamaged(object sender, EventArgs e)
         {
-            Game.World.Score += Klass.DamageScore;
+            Game.World.Player.Score += Klass.DamageScore;
         }
 
         private void OnDeath(object sender, EventArgs e)
         {
-            Game.World.Score += Klass.KillScore;
+            Game.World.Player.Score += Klass.KillScore;
             Expired = true;
         }
 

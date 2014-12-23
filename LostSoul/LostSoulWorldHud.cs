@@ -147,8 +147,8 @@ namespace LostSoul
 
         public void Update(GameTime gameTime)
         {
-            scoreLabel.Text = "Score: " + world.Score;
-            lostSoulsLabel.Text = "Lives: " + world.Lives;
+            scoreLabel.Text = "Score: " + world.Player.Score;
+            lostSoulsLabel.Text = "Lives: " + world.Player.HealthBehavior.Health;
             difficultyLabel.Text = String.Format("Difficulty: {0:#}%",
                 (world.Difficulty / world.MaxDifficulty) * 100.0f);
 

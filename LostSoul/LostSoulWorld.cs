@@ -23,17 +23,15 @@ namespace LostSoul
         private BonusSpawner bonusSpawner;
 
         private Player player;
+        public Player Player { get { return player; } }
+
         private LostSoulSpawner enemySpawner;
 
         private List<Entity> actors = new List<Entity>();
         private List<Entity> expiredActors = new List<Entity>();
 
-        private int lives = StartingLives;
-        public int Lives { get { return lives; } }
-
         private List<CollisionBehavior> collisions = new List<CollisionBehavior>();
 
-        public int Score;
         public List<Entity> Actors { get { return actors; } }
         private List<Entity> newActors = new List<Entity>();
 
@@ -53,6 +51,8 @@ namespace LostSoul
             background = new Background(Game);
             player = new Player(Game);
             player.BodyBehavior.Position = new Vector2(PlayField.Center.X, PlayField.Center.Y);
+            player.HealthBehavior.DeathEvent += PlayerDeathEventHandler;
+            player.HealthBehavior.SetHealthOmittingEventsAndChecks(StartingLives);
 
             enemySpawner = new LostSoulSpawner(Game);
             bonusSpawner = new BonusSpawner(this);
@@ -125,11 +125,12 @@ namespace LostSoul
 
         public void AddLives(int amount)
         {
-            lives += amount;
-            if (!HasLives())
-            {
-                GoToGameOver();
-            }
+            player.HealthBehavior.Health += amount;
+        }
+
+        private void PlayerDeathEventHandler(object sender, EventArgs e)
+        {
+            GoToGameOver();
         }
 
         private void GoToGameOver()
@@ -175,12 +176,7 @@ namespace LostSoul
 
         public bool IsGameOver()
         {
-            return !HasLives();
-        }
-
-        private bool HasLives()
-        {
-            return lives > 0;
+            return player.HealthBehavior.IsDead;
         }
 
         private SpriteBatch SpriteBatch
