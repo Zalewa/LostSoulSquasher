@@ -14,7 +14,7 @@ LICENSE.lostsoul.txt.
 
 When speaking about media we consider files located in "Content"
 subdirectory in binary release of the program, or files located in
-"LostSoulContent/LostSoulContentContent" subdirectory in source code
+"LostSoulContent" subdirectory in source code
 form of the program.
 
 Following media fall under following licenses:
