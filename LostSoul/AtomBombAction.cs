@@ -62,7 +62,7 @@ namespace LostSoul
             var result = new List<Vector2>();
             var explosionPrototype = new Explosion(game);
             var size = explosionPrototype.BodyBehavior.Size;
-            var playField = game.PlayField;
+            var playField = game.World.PlayField;
             for (float x = size.X; x < playField.Width; x += size.X)
             {
                 for (float y = size.Y; y < playField.Height; y += size.Y)

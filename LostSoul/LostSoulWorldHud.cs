@@ -27,7 +27,7 @@ namespace LostSoul
             this.world = world;
             world.GameOverChanged += OnGameOverChangedHandler;
             root = new HudElement(world.Game);
-            root.BodyBehavior.Size = new Vector2(world.Game.PlayField.Width, world.Game.PlayField.Height);
+            root.BodyBehavior.Size = new Vector2(world.PlayField.Width, world.PlayField.Height);
 
             setupGameHud(world);
             setupGameOverHud(world);
@@ -100,7 +100,7 @@ namespace LostSoul
 
         private void setupGameOverText(LostSoulWorld world)
         {
-            var center = new Vector2(world.Game.PlayField.Center.X, world.Game.PlayField.Center.Y);
+            var center = new Vector2(world.PlayField.Center.X, world.PlayField.Center.Y);
             var label = new HudElementText(world.Game, "Game Over");
             var position = center - label.RenderBehavior.Size / 2.0f;
             position.Y -= label.RenderBehavior.Size.Y;
@@ -111,7 +111,7 @@ namespace LostSoul
 
         private void setupGameOverInstructions(LostSoulWorld world)
         {
-            var center = new Vector2(world.Game.PlayField.Center.X, world.Game.PlayField.Center.Y);
+            var center = new Vector2(world.PlayField.Center.X, world.PlayField.Center.Y);
             var label = new HudElementText(world.Game, "Press RMB to restart or Escape to exit.");
             var position = center - label.RenderBehavior.Size / 2.0f;
             position.Y += label.RenderBehavior.Size.Y;

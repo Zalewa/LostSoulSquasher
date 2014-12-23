@@ -9,6 +9,7 @@ namespace LostSoul
 {
     public class LostSoulWorld : Entity
     {
+        public readonly Rectangle PlayField = new Rectangle(0, 0, 640, 480);
         public const int StartingLives = 10;
 
         public event EventHandler GameOverChanged;
@@ -51,7 +52,7 @@ namespace LostSoul
 
             background = new Background(Game);
             player = new Player(Game);
-            player.BodyBehavior.Position = new Vector2(Game.PlayField.Center.X, Game.PlayField.Center.Y);
+            player.BodyBehavior.Position = new Vector2(PlayField.Center.X, PlayField.Center.Y);
 
             enemySpawner = new LostSoulSpawner(Game);
             bonusSpawner = new BonusSpawner(this);

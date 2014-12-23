@@ -52,7 +52,7 @@ namespace LostSoul
         {
             Vector2 delta = new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - new Vector2(oldState.X, oldState.Y);
             var newPosition = entity.BodyBehavior.Position + new Vector2(delta.X, delta.Y);
-            var playfield = game.PlayField;
+            var playfield = game.World.PlayField;
             newPosition = Vector2.Clamp(newPosition,
                 new Vector2(playfield.Left, playfield.Top),
                 new Vector2(playfield.Right, playfield.Bottom));

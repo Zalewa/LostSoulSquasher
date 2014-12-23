@@ -31,7 +31,7 @@ namespace LostSoul
                 throw new InvalidOperationException("null bonus class returned");
             }
             var entity = new Bonus(world.Game, klass);
-            var spawnField = world.Game.PlayField;
+            var spawnField = world.PlayField;
             float margin = entity.BodyBehavior.Size.X;
             spawnField.Inflate((int)-margin, (int)-margin);
             entity.BodyBehavior.Position = new Vector2(

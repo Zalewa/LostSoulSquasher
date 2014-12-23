@@ -20,8 +20,6 @@ namespace LostSoul
             public bool FullScreen;
         };
 
-        public readonly Rectangle PlayField = new Rectangle(0, 0, 640, 480);
-
         private GraphicsDeviceManager graphics;
         public GraphicsDeviceManager Graphics { get { return graphics; } }
 
@@ -52,6 +50,9 @@ namespace LostSoul
         {
             world = new LostSoulWorld(this);
             world.LoadContent();
+
+            audio.ListenerPosition = new Vector2(world.PlayField.Center.X, world.PlayField.Center.Y);
+            audio.PanDivisor = world.PlayField.Width / 2;
         }
 
         public void ToggleFullScreen()
@@ -104,8 +105,6 @@ namespace LostSoul
         protected override void Initialize()
         {
             audio = new AudioSystem();
-            audio.ListenerPosition = new Vector2(PlayField.Center.X, PlayField.Center.Y);
-            audio.PanDivisor = PlayField.Width / 2;
             audio.PanClamp = 0.9f;
             base.Initialize();
         }
@@ -145,12 +144,20 @@ namespace LostSoul
 
         private float GameScaleY()
         {
-            return graphics.PreferredBackBufferHeight / (float)PlayField.Height;
+            if (world == null)
+            {
+                return 1.0f;
+            }
+            return graphics.PreferredBackBufferHeight / (float)world.PlayField.Height;
         }
 
         private float GameScaleX()
         {
-            return graphics.PreferredBackBufferWidth / (float)PlayField.Width;
+            if (world == null)
+            {
+                return 1.0f;
+            }
+            return graphics.PreferredBackBufferWidth / (float)world.PlayField.Width;
         }
 
         internal Vector2 ProjectScreenCoordsToGameCoords(Vector2 point)

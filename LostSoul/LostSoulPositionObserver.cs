@@ -18,7 +18,7 @@ namespace LostSoul
         {
             LostSoul entity = (LostSoul)((BodyBehavior)sender).Entity;
             var pos = entity.BodyBehavior.Position;
-            if (!entity.Game.PlayField.Contains((int)pos.X, (int)pos.Y))
+            if (!entity.Game.World.PlayField.Contains((int)pos.X, (int)pos.Y))
             {
                 if (wasInPlayfield)
                 {

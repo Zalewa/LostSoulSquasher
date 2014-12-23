@@ -100,16 +100,17 @@ namespace LostSoul
 
         private Vector2 PickLocation(LostSoulGame game, Edge edge)
         {
+            var playField = game.World.PlayField;
             switch (edge)
             {
                 case Edge.Left:
-                    return new Vector2(game.PlayField.Left, random.Next(game.PlayField.Top, game.PlayField.Bottom));
+                    return new Vector2(playField.Left, random.Next(playField.Top, playField.Bottom));
                 case Edge.Right:
-                    return new Vector2(game.PlayField.Right, random.Next(game.PlayField.Top, game.PlayField.Bottom));
+                    return new Vector2(playField.Right, random.Next(playField.Top, playField.Bottom));
                 case Edge.Top:
-                    return new Vector2(random.Next(game.PlayField.Left, game.PlayField.Right), game.PlayField.Top);
+                    return new Vector2(random.Next(playField.Left, playField.Right), playField.Top);
                 case Edge.Bottom:
-                    return new Vector2(random.Next(game.PlayField.Left, game.PlayField.Right), game.PlayField.Bottom);
+                    return new Vector2(random.Next(playField.Left, playField.Right), playField.Bottom);
                 default:
                     throw new NotImplementedException("unknown edge " + edge);
             }
@@ -123,8 +124,9 @@ namespace LostSoul
                 speed *= 2.0f;
             }
 
+            var playField = game.World.PlayField;
             var position = soul.BodyBehavior.Position;
-            Vector2 diff = new Vector2(game.PlayField.Center.X, game.PlayField.Center.Y) - position;
+            Vector2 diff = new Vector2(playField.Center.X, playField.Center.Y) - position;
             diff = Vector2.Normalize(diff);
 
             float angle = MathHelper.ToRadians(22.5f - (45.0f * (float)random.NextDouble()));
