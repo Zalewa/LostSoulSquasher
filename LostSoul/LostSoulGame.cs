@@ -136,38 +136,5 @@ namespace LostSoul
             world.Draw(gameTime);
             base.Draw(gameTime);
         }
-
-        public Matrix GetScaleMatrix()
-        {
-            return Matrix.CreateScale(GameScaleX(), GameScaleY(), 1.0f);
-        }
-
-        private float GameScaleY()
-        {
-            if (world == null)
-            {
-                return 1.0f;
-            }
-            return graphics.PreferredBackBufferHeight / (float)world.PlayField.Height;
-        }
-
-        private float GameScaleX()
-        {
-            if (world == null)
-            {
-                return 1.0f;
-            }
-            return graphics.PreferredBackBufferWidth / (float)world.PlayField.Width;
-        }
-
-        internal Vector2 ProjectScreenCoordsToGameCoords(Vector2 point)
-        {
-            return new Vector2(point.X / GameScaleX(), point.Y / GameScaleY());
-        }
-
-        internal Vector2 ProjectGameCoordsToScreenCoords(Vector2 point)
-        {
-            return new Vector2(point.X * GameScaleX(), point.Y * GameScaleY());
-        }
     }
 }

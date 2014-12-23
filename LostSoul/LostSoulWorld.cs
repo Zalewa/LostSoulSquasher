@@ -88,7 +88,7 @@ namespace LostSoul
 
         public override void Draw(GameTime gameTime)
         {
-            Matrix scaleMatrix = Game.GetScaleMatrix();
+            Matrix scaleMatrix = GetScaleMatrix();
             SpriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scaleMatrix);
             background.Draw(gameTime);
             foreach (Entity actor in actors)
@@ -234,6 +234,21 @@ namespace LostSoul
         internal void ModifyDifficultyByFactor(float factor)
         {
             enemySpawner.ModifyDifficultyByFactor(factor);
+        }
+
+        private Matrix GetScaleMatrix()
+        {
+            return Matrix.CreateScale(GameScaleX(), GameScaleY(), 1.0f);
+        }
+
+        private float GameScaleY()
+        {
+            return Game.Graphics.PreferredBackBufferHeight / (float)PlayField.Height;
+        }
+
+        private float GameScaleX()
+        {
+            return Game.Graphics.PreferredBackBufferWidth / (float)PlayField.Width;
         }
     }
 }
