@@ -60,13 +60,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="background.png">
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="MISLB0.png">
       <Name>MISLB0</Name>
       <Importer>TextureImporter</Importer>
