@@ -1,0 +1,39 @@
+# Credits
+
+Copyright (c) 2014 - Zalewa & Darketka.
+
+- Source code, game design and documentation
+    Zalewa <zalewapl@gmail.com>
+- Audiovisual design, game design:
+    Darketka <darketka@gmail.com>
+
+# Licensing
+
+LostSoul source code falls under FreeBSD license. Refer to
+LICENSE.lostsoul.txt.
+
+When speaking about media we consider files located in "Content"
+subdirectory in binary release of the program, or files located in
+"LostSoulContent/LostSoulContentContent" subdirectory in source code
+form of the program.
+
+Following media fall under following licenses:
+
+License of this game, refer to LICENSE.lostsoul.txt:
+- bonus_1up.png, bonus_5up.png, bonut_atom.png, bonut_baby.png,
+  bonus_turtle.png, crosshair.png, or all files in backgrounds/
+  directory.
+
+Freedoom license, refer to LICENSE.freedoom.txt.
+Freedoom: http://freedoom.github.io/
+- MISLB0.png, MISLC0.png, MISLD0.png, SKUL.png, SKUL_left.png,
+  DSBAREXP.wav, DSDMACT.wav, DSDMPAIN.WAV, DSSKLATK.wav
+
+Carefree.mp3
+"Carefree" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0
+http://creativecommons.org/licenses/by/3.0/
+
+
+Every other media:
+CC0_1.0_Universal.license.txt
