@@ -32,6 +32,9 @@ namespace LostSoul
         private LostSoulWorld world;
         public LostSoulWorld World { get { return world; } }
 
+        private InputState prevInputState;
+        public InputState PrevInputState { get { return prevInputState; } }
+
         private VideoMode windowedMode;
 
         public LostSoulGame()
@@ -106,6 +109,7 @@ namespace LostSoul
         {
             audio = new AudioSystem();
             audio.PanClamp = 0.9f;
+            StoreInputState();
             base.Initialize();
         }
 
@@ -126,7 +130,7 @@ namespace LostSoul
         {
             world.Update(gameTime);
             Audio.FireSounds();
-
+            StoreInputState();
             base.Update(gameTime);
         }
 
@@ -135,6 +139,15 @@ namespace LostSoul
             GraphicsDevice.Clear(Color.CornflowerBlue);
             world.Draw(gameTime);
             base.Draw(gameTime);
+        }
+
+        private void StoreInputState()
+        {
+            prevInputState = new InputState()
+            {
+                MouseState = Mouse.GetState(),
+                KeyboardState = Keyboard.GetState()
+            };
         }
     }
 }

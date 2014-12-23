@@ -10,8 +10,6 @@ namespace LostSoul
     class LostSoulWorldInputBehavior : Behavior
     {
         private LostSoulWorld world;
-        private MouseState oldMouseState;
-        private KeyboardState oldKeyboardState;
 
         public LostSoulWorldInputBehavior(LostSoulWorld world)
         {
@@ -22,26 +20,40 @@ namespace LostSoul
         {
             if (world.IsGameOver())
             {
-                if (Mouse.GetState().RightButton == ButtonState.Pressed && oldMouseState.RightButton == ButtonState.Released)
+                if (Mouse.GetState().RightButton == ButtonState.Pressed && PrevMouseState.RightButton == ButtonState.Released)
                 {
                     world.Game.ResetGame();
                 }
             }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape) && oldKeyboardState.IsKeyUp(Keys.Escape))
+                || Keyboard.GetState().IsKeyDown(Keys.Escape) && PrevKeyboardState.IsKeyUp(Keys.Escape))
             {
                 world.Game.Exit();
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.OemCloseBrackets) && oldKeyboardState.IsKeyUp(Keys.OemCloseBrackets))
+            if (Keyboard.GetState().IsKeyDown(Keys.OemCloseBrackets) && PrevKeyboardState.IsKeyUp(Keys.OemCloseBrackets))
             {
                 world.Background.CycleBackground();
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.F) && oldKeyboardState.IsKeyUp(Keys.F))
+            if (Keyboard.GetState().IsKeyDown(Keys.F) && PrevKeyboardState.IsKeyUp(Keys.F))
             {
                 world.Game.ToggleFullScreen();
             }
-            oldMouseState = Mouse.GetState();
-            oldKeyboardState = Keyboard.GetState();
+        }
+
+        private KeyboardState PrevKeyboardState
+        {
+            get
+            {
+                return world.Game.PrevInputState.KeyboardState;
+            }
+        }
+
+        private MouseState PrevMouseState
+        {
+            get
+            {
+                return world.Game.PrevInputState.MouseState;
+            }
         }
     }
 }

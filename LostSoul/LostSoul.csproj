@@ -72,6 +72,7 @@
     <Compile Include="FactorModifierActor.cs" />
     <Compile Include="HudElement.cs" />
     <Compile Include="HudElementText.cs" />
+    <Compile Include="InputState.cs" />
     <Compile Include="LostSoulClass.cs" />
     <Compile Include="LostSoulWorld.cs" />
     <Compile Include="CollisionBehavior.cs" />
