@@ -18,8 +18,30 @@ namespace LostSoul
         [STAThread]
         static void Main()
         {
-            using (var game = new LostSoulGame())
-                game.Run();
+            try
+            {
+                using (var game = new LostSoulGame())
+                    game.Run();
+            }
+            catch (Exception e)
+            {
+                string stackfile = System.IO.Path.GetTempPath() + "lostsoul_" + Guid.NewGuid().ToString();
+                System.IO.StreamWriter file = new System.IO.StreamWriter(stackfile);
+                WriteExceptionsUntilNoMoreInner(e, file);
+                file.Close();
+                throw e;
+            }
+        }
+
+        private static void WriteExceptionsUntilNoMoreInner(Exception e, System.IO.StreamWriter file)
+        {
+            while (e != null)
+            {
+                file.WriteLine(e.Message);
+                file.WriteLine(e.StackTrace);
+                file.WriteLine("");
+                e = e.InnerException;
+            }
         }
     }
 #endif
