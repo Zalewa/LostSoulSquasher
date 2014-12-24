@@ -19,6 +19,9 @@ randomly. Game ends when too many "bugs" escape.
 
 ![Game screenshot](docs/game_screenshot.jpg)
 
+Video:
+https://www.youtube.com/watch?v=CAL43H2AXqU
+
 # Why?
 
 The goal of this project was an exercise on building a component
