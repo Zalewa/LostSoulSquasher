@@ -158,10 +158,10 @@ still all Entities there are Updated() and Drawn() in order from
 oldest to youngest. When a new Entity is added through
 LostSoulWorld.AddActor(), this entity is first appended to `newActors`
 list. This list is omitted in Update() and Draw() period. This
-prevents concurrent modification the actors list that can be currently
-iterated on, so it's safe to call AddActor from any place in the
-code. All `newActors` are moved to actual actors list on the beginning
-of LostSoulWorld.Update() call.
+prevents concurrent modification and iteration of the `actors`
+list. It's safe to call AddActor from any place in the code. All
+`newActors` are moved to actual actors list on the beginning of
+LostSoulWorld.Update() call.
 
 **Collisions:** I'll jump ahead here and discuss how
 [CollisionBehavior](LostSoul/CollisionBehavior.cs) works. Each time a
