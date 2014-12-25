@@ -20,7 +20,7 @@ form of the program.
 Following media fall under following licenses:
 
 License of this game, refer to LICENSE.lostsoul.txt:
-- bonus_1up.png, bonus_5up.png, bonut_atom.png, bonut_baby.png,
+- bonus_1up.png, bonus_5up.png, bonus_atom.png, bonus_baby.png,
   bonus_turtle.png, crosshair.png, or all files in backgrounds/
   directory.
 
