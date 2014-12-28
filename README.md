@@ -6,12 +6,6 @@ shepherd and blast them back to the fiery pits of Hell so that they
 don't get lost. Click on the screen to fire and collect bonuses which
 will help you.
 
-# Java/libGDX version
-
-Available here: https://github.com/Zalewa/LostSoulSquasherGdx
-
-Functionally is the same.
-
 # What is this?
 
 This is a 2D 'bug squasher' game that revolves on a single screen with
@@ -27,6 +21,12 @@ randomly. Game ends when too many "bugs" escape.
 
 Video:
 https://www.youtube.com/watch?v=CAL43H2AXqU
+
+# Java/libGDX version
+
+Available here: https://github.com/Zalewa/LostSoulSquasherGdx
+
+Functionally is the same.
 
 # Why?
 
